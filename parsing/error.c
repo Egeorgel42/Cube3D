@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/21 15:39:29 by egeorgel         ###   ########.fr       */
+/*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
+/*   Updated: 2023/07/21 15:48:33 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	error(t_cub *cub, int err)
 {
-	t_cub	cub;
+	ft_printf("Error\n");
+	if (err == ERRMAX)
+		perror(NULL);
+	else
+		ft_printf("%s\n", cub->errors[err]);
+	exit(1);
+}
 
-	if (argc < 2)
-		return (0);
-	error_init(&cub);
-	get_params(&cub, argv[1]);
+void	error_init(t_cub *cub)
+{
+	cub->errors = malloc(sizeof(char *) * (ERRMAX + 1));
+	cub->errors[ERRFILE] = ft_strdup("Invalid file type");
+	cub->errors[ERRMAX] = NULL;
 }

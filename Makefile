@@ -6,12 +6,14 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/20 11:52:26 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/07/21 15:53:10 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-SRC = main.c
+SRC = main.c \
+parsing/get_params.c \
+parsing/error.c
 OBJ = ${SRC:.c=.o}
 
 LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
@@ -20,18 +22,19 @@ LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
 #for Macos
 #uncomment whichever flag is needed depending on your OS
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g -I.
 LIBFT = libft/libft.a
-HDR = cube3d.h
-NAME = Cube3D
+HDR = cub3d.h
+NAME = Cub3D
 
 all: $(NAME)
 
 $(LIBFT):
-	cd libft && make bonus;
+	cd libft && $(MAKE) bonus;
 
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME)
+	$(MAKE) clean
 
 .c.o: $(HDR) Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<
