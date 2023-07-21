@@ -6,14 +6,16 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/21 15:53:10 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/07/21 18:11:30 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 SRC = main.c \
 parsing/get_params.c \
-parsing/error.c
+parsing/error.c \
+parsing/param.c \
+utils/param_utils.c
 OBJ = ${SRC:.c=.o}
 
 LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
