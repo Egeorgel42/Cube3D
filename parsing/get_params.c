@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/21 18:38:23 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:21:43 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	get_params(t_cub *cub, char *filename)
 		error(cub, ERRFILE, NULL);
 	free(filename_end);
 	get_file(cub, &file, filename);
-	get_param(cub, file, "R", &cub->params.res_x);
-	get_param(cub, file, "R", &cub->params.res_y);
+	cub->params.res_x = (int *)get_param(cub, file, "R");
+	cub->params.res_y = (int *)get_param(cub, file, "R");
+	cub->params.no = (char *)get_param(cub, file, "NO");
 }

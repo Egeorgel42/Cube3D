@@ -6,13 +6,13 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 21:43:49 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/02/10 01:37:02 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/21 23:55:14 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool	ft_strcmp(char *str, char *cmp)
+bool	ft_strcmp(const char *str, const char *cmp)
 {
 	int	i;
 

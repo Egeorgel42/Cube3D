@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/21 15:39:29 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:30:34 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,7 @@ int	main(int argc, char **argv)
 		return (0);
 	error_init(&cub);
 	get_params(&cub, argv[1]);
+	ft_printf("%d\n", *cub.params.res_x);
+	ft_printf("%d\n", *cub.params.res_y);
+	ft_printf("%s\n", cub.params.no);
 }

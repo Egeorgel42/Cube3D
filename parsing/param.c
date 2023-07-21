@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:43:32 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/21 18:30:55 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:17:35 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,38 @@ static bool	starts_with(char *line, char *param_name)
 
 static char	*find_param(t_cub *cub, char **file, char *param_name)
 {
-	int	i;
+	int		i;
+	char	*res;
 
 	i = 0;
 	while (file[i] && !starts_with(file[i], param_name))
 		i++;
 	if (!file[i])
 		error(cub, MISSING_PARAM, param_name);
-	rem_first_word(&file[i]);
-	if (!file[i])
-		error(cub, INVALID_PARAM, NULL);
-	return (file[i]);
+	res = extract_second_word(cub, &file[i]);
+	return (res);
 }
 
-void	get_param(t_cub *cub, char **file, char *param_name, void *param)
+static void	*convert_param(t_cub *cub, char *res)
 {
-	char	*line;
+	int	i;
+	int	*int_res;
 
-	line = find_param(cub, file, param_name);
-	if (param || !param)
-		param = line;
-	ft_printf("%s\n", line);
+	i = 0;
+	while (res[i] && ft_isdigit(res[i]))
+		i++;
+	if (res[i])
+		return (res);
+	int_res = malloc(sizeof(int));
+	*int_res = my_atoi(cub, res);
+	free(res);
+	return (int_res);
+}
+
+void	*get_param(t_cub *cub, char **file, char *param_name)
+{
+	char	*res;
+
+	res = find_param(cub, file, param_name);
+	return (convert_param(cub, res));
 }
