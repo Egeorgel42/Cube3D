@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:41:25 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:47:27 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef enum e_err
 	MISSING_PARAM,
 	INVALID_PARAM,
 	DOUBLE_PARAM,
+	TOMANY_PARAM,
+	NOMAP,
 	ERRINT,
 	ERRMAX,
 }	t_err;

@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 15:52:48 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 23:05:10 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	free_cub(t_cub *cub)
 {
 	freetab((void **)cub->errors);
+	freetab((void **)cub->params.map);
 	free(cub->params.res_x);
 	free(cub->params.res_y);
 	free(cub->params.n_text);
