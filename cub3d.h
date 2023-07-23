@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 15:42:26 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 16:41:25 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_cub
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
 void	*get_param(t_cub *cub, char **file, char *param_name);
+void	get_map(t_cub *cub, char **file);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
 

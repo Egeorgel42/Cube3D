@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:26:12 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 16:46:57 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,26 @@ static int	count_lines(t_cub *cub, char *filename)
 	return (i);
 }
 
-static void	get_file(t_cub *cub, char ***file, char *filename)
+static char	**get_file(t_cub *cub, char *filename)
 {
-	int	fd;
-	int	i;
+	char	**file;
+	int		fd;
+	int		i;
 
 	i = 0;
-	*file = malloc(sizeof(char *) * (count_lines(cub, filename) + 1));
+	file = malloc(sizeof(char *) * (count_lines(cub, filename) + 1));
+	if (!file)
+		error(cub, ERRMAX, NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		error(cub, ERRMAX, NULL);
-	(*file)[i] = get_next_line(fd);
-	while ((*file)[i])
+	file[i] = get_next_line(fd);
+	while (file[i])
 	{
 		i++;
-		(*file)[i] = get_next_line(fd);
+		file[i] = get_next_line(fd);
 	}
+	return (file);
 }
 
 void	get_params(t_cub *cub, char *filename)
@@ -65,7 +69,7 @@ void	get_params(t_cub *cub, char *filename)
 	if (!ft_strcmp(filename_end, ".cub"))
 		error(cub, ERRFILE, NULL);
 	free(filename_end);
-	get_file(cub, &file, filename);
+	file = get_file(cub, filename);
 	cub->params.res_x = (int *)get_param(cub, file, "R");
 	cub->params.res_y = (int *)get_param(cub, file, "R");
 	cub->params.n_text = (char *)get_param(cub, file, "NO");
@@ -75,5 +79,6 @@ void	get_params(t_cub *cub, char *filename)
 	cub->params.sprite_text = (char *)get_param(cub, file, "S");
 	cub->params.floor_color = (int *)get_param(cub, file, "F");
 	cub->params.ceiling_color = (int *)get_param(cub, file, "C");
+	get_map(cub, file);
 	freetab((void **)file);
 }

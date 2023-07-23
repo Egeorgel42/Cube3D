@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 15:42:49 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 16:46:16 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,19 @@ void	error(t_cub *cub, int err, char *arg)
 
 void	error_init(t_cub *cub)
 {
+	int	i;
+
+	i = -1;
 	cub->errors = malloc(sizeof(char *) * (ERRMAX + 1));
+	if (!cub->errors)
+		error(cub, ERRMAX, NULL);
 	cub->errors[ERRFILE] = ft_strdup("Invalid file type");
 	cub->errors[MISSING_PARAM] = ft_strdup("file is missing the parameter ");
 	cub->errors[INVALID_PARAM] = ft_strdup("parameter is invalid");
 	cub->errors[DOUBLE_PARAM] = ft_strdup("parameter is declared two times");
 	cub->errors[ERRINT] = ft_strdup("parameter is longer than a int");
 	cub->errors[ERRMAX] = NULL;
+	while (++i < ERRMAX)
+		if (!cub->errors[i])
+			error(cub, ERRMAX, NULL);
 }
