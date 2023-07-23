@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:43:32 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/22 00:17:35 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 15:54:08 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	starts_with(char *line, char *param_name)
 		i++;
 	while (line[i + j] && param_name[j] && line[i + j] == param_name[j])
 		j++;
-	if (!param_name[j])
+	if (!param_name[j] && (!line[i + j] || line[i + j] == ' '))
 		return (true);
 	return (false);
 }
@@ -31,6 +31,7 @@ static bool	starts_with(char *line, char *param_name)
 static char	*find_param(t_cub *cub, char **file, char *param_name)
 {
 	int		i;
+	int		j;
 	char	*res;
 
 	i = 0;
@@ -38,6 +39,11 @@ static char	*find_param(t_cub *cub, char **file, char *param_name)
 		i++;
 	if (!file[i])
 		error(cub, MISSING_PARAM, param_name);
+	j = i + 1;
+	while (file[j] && !starts_with(file[j], param_name))
+		j++;
+	if (file[j] && i != j)
+		error(cub, DOUBLE_PARAM, NULL);
 	res = extract_second_word(cub, &file[i]);
 	return (res);
 }
@@ -48,14 +54,14 @@ static void	*convert_param(t_cub *cub, char *res)
 	int	*int_res;
 
 	i = 0;
-	while (res[i] && ft_isdigit(res[i]))
+	while (res[i] && (ft_isdigit(res[i]) || res[i] == ','))
 		i++;
 	if (res[i])
-		return (res);
+		return ((void *)res);
 	int_res = malloc(sizeof(int));
 	*int_res = my_atoi(cub, res);
 	free(res);
-	return (int_res);
+	return ((void *)int_res);
 }
 
 void	*get_param(t_cub *cub, char **file, char *param_name)

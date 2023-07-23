@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/22 00:21:20 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 15:42:26 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_err
 	ERRFILE,
 	MISSING_PARAM,
 	INVALID_PARAM,
+	DOUBLE_PARAM,
 	ERRINT,
 	ERRMAX,
 }	t_err;
@@ -43,9 +44,13 @@ typedef struct s_param
 	char	**map;
 	int		*res_x;
 	int		*res_y;
-	char	*no;
-	int		floor_color;
-	int		ceiling_color;
+	char	*n_text;
+	char	*s_text;
+	char	*w_text;
+	char	*e_text;
+	char	*sprite_text;
+	int		*floor_color;
+	int		*ceiling_color;
 }	t_param;
 
 typedef struct s_cub
@@ -64,5 +69,6 @@ void	error(t_cub *cub, int err, char *arg);
 /*UTILS*/
 char	*extract_second_word(t_cub *cub, char **line);
 long	my_atoi(t_cub *cub, const char *str);
+void	freetab(void **tab);
 
 #endif

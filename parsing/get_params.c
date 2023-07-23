@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/22 00:21:43 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:26:11 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,12 @@ void	get_params(t_cub *cub, char *filename)
 	get_file(cub, &file, filename);
 	cub->params.res_x = (int *)get_param(cub, file, "R");
 	cub->params.res_y = (int *)get_param(cub, file, "R");
-	cub->params.no = (char *)get_param(cub, file, "NO");
+	cub->params.n_text = (char *)get_param(cub, file, "NO");
+	cub->params.s_text = (char *)get_param(cub, file, "SO");
+	cub->params.w_text = (char *)get_param(cub, file, "WE");
+	cub->params.e_text = (char *)get_param(cub, file, "EA");
+	cub->params.sprite_text = (char *)get_param(cub, file, "S");
+	cub->params.floor_color = (int *)get_param(cub, file, "F");
+	cub->params.ceiling_color = (int *)get_param(cub, file, "C");
+	freetab((void **)file);
 }
