@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 21:43:49 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/21 23:55:14 by egeorgel         ###   ########.fr       */
+/*   Created: 2023/07/23 12:58:00 by egeorgel          #+#    #+#             */
+/*   Updated: 2023/07/23 13:00:35 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-bool	ft_strcmp(const char *str, const char *cmp)
+void	freetab(void **tab)
 {
 	int	i;
 
-	i = 0;
-	if (!str || !cmp)
-		return (false);
-	if (ft_strlen(str) != ft_strlen(cmp))
-		return (false);
-	while (str[i] && str[i] == cmp[i])
-	{
-		i++;
-	}
-	if (str[i] || cmp[i])
-		return (false);
-	return (true);
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
 }
