@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:10:42 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:44:09 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:44:42 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,6 @@ static int	get_first_word(t_cub *cub, char *line)
 	return (i);
 }
 
-static void	remove_extracted(t_cub *cub, char **line, int i, int j)
-{
-	char	*begin;
-	char	*end;
-
-	begin = ft_substr(*line, 0, i);
-	if (!begin)
-		error(cub, ERRMAX, NULL);
-	end = ft_substr(*line, j, ft_strlen(*line));
-	if (!end)
-		error(cub, ERRMAX, NULL);
-	free(*line);
-	*line = ft_strjoinfree(begin, end, true, true);
-	if (!line)
-		error(cub, ERRMAX, NULL);
-}
-
 char	*extract_second_word(t_cub *cub, char **line)
 {
 	char	*extracted;
@@ -59,13 +42,7 @@ char	*extract_second_word(t_cub *cub, char **line)
 	extracted = ft_substr(*line, i, j - i);
 	if (!extracted)
 		error(cub, ERRMAX, NULL);
-	d = j;
-	while ((*line)[d] && ((*line)[d] == ' ' || (*line)[d] == '\n'))
-		d++;
-	if (!(*line)[d])
-		(*line)[0] = '\0';
-	else
-		remove_extracted(cub, line, i, j);
+	(*line)[0] = '\0';
 	return (extracted);
 }
 

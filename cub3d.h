@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:41:25 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:50:12 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@
 
 /*ERRORS*/
 
+typedef enum e_param_type
+{
+	INT_PARAM,
+	STR_PARAM
+}	t_param_type;
+
 typedef enum e_err
 {
 	ERRFILE,
 	MISSING_PARAM,
 	INVALID_PARAM,
 	DOUBLE_PARAM,
+	TOMANY_PARAM,
+	NOMAP,
 	ERRINT,
 	ERRMAX,
 }	t_err;
@@ -62,7 +70,7 @@ typedef struct s_cub
 
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
-void	*get_param(t_cub *cub, char **file, char *param_name);
+void	*get_param(t_cub *cub, char **file, char *param_name, int param_type);
 void	get_map(t_cub *cub, char **file);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
