@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   param_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:10:42 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:44:09 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:36:57 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int	get_first_word(t_cub *cub, char *line)
 {

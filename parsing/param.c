@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   param.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:43:32 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:42:20 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:36:49 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static bool	starts_with(char *line, char *param_name)
 {

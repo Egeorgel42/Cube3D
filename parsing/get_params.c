@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:46:57 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:40:10 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int	count_lines(t_cub *cub, char *filename)
 {
@@ -79,6 +79,6 @@ void	get_params(t_cub *cub, char *filename)
 	cub->params.sprite_text = (char *)get_param(cub, file, "S");
 	cub->params.floor_color = (int *)get_param(cub, file, "F");
 	cub->params.ceiling_color = (int *)get_param(cub, file, "C");
-	get_map(cub, file);
+	//get_map(cub, file);
 	freetab((void **)file);
 }

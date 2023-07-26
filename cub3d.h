@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:41:25 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:39:54 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include <mlx.h>
+//# include <mlx.h>
+# include "minilibx_opengl/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
@@ -63,7 +64,7 @@ typedef struct s_cub
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
 void	*get_param(t_cub *cub, char **file, char *param_name);
-void	get_map(t_cub *cub, char **file);
+//void	get_map(t_cub *cub, char **file);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
 
