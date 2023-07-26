@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/24 11:25:00 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:26:54 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 void	map_parse(t_cub *cub)
 {
-	char	**map;
-
-	map = cub->params.map;
-	
+	cub->params.map = 0;
 }

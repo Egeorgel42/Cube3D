@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 16:09:12 by ory              ###   ########.fr       */
+/*   Updated: 2023/07/26 16:24:32 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-//# include <mlx.h>
-# include "minilibx_opengl/mlx.h"
+# include <mlx.h>
+//# include "minilibx_opengl/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
 # include "libft/libft.h"
+
+# define MAP_SIDE 2
 
 typedef enum e_param_type
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   param_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:10:42 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 16:10:41 by ory              ###   ########.fr       */
+/*   Updated: 2023/07/26 16:25:58 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 static int	get_first_word(t_cub *cub, char *line)
 {
@@ -33,7 +33,6 @@ char	*extract_second_word(t_cub *cub, char **line)
 	char	*extracted;
 	int		i;
 	int		j;
-	int		d;
 
 	i = get_first_word(cub, *line);
 	j = i;

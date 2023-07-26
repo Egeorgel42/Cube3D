@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/26 15:47:42 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/07/26 16:27:21 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ NAME = Cub3D
 all: $(NAME)
 
 $(NAME):$(OBJ) 
-	@make -C minilibx_opengl/ all
 	@make -C ./libft bonus
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	$(MAKE) clean
