@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 16:24:32 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:44:08 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,24 @@ typedef enum e_err
 	INVALID_PARAM,
 	DOUBLE_PARAM,
 	TOMANY_PARAM,
+	PARAM_AFTER_MAP,
 	NOMAP,
+	NOPLAYER,
+	MULTIPLE_PLAYERS,
+	INVALID_MAP_CHARACTER,
+	MAPHOLE,
 	ERRINT,
 	ERRMAX,
 }	t_err;
 
 /*STRUCT*/
+
+typedef struct s_coordinates
+{
+	int	x;
+	int	y;
+}	t_coordinates;
+
 
 typedef struct s_mlx
 {
@@ -52,13 +64,14 @@ typedef struct s_mlx
 
 typedef struct s_param
 {
-	char	**map;
-	char	*n_text;
-	char	*s_text;
-	char	*w_text;
-	char	*e_text;
-	int		*floor_color;
-	int		*ceiling_color;
+	char			**map;
+	t_coordinates	player_pos;
+	char			*n_text;
+	char			*s_text;
+	char			*w_text;
+	char			*e_text;
+	int				*floor_color;
+	int				*ceiling_color;
 }	t_param;
 
 typedef struct s_cub
@@ -72,6 +85,7 @@ typedef struct s_cub
 void	get_params(t_cub *cub, char *filename);
 void	*get_param(t_cub *cub, char **file, char *param_name, int param_type);
 void	get_map(t_cub *cub, char **file);
+void	map_parse(t_cub *cub);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
 
@@ -79,5 +93,6 @@ void	error(t_cub *cub, int err, char *arg);
 char	*extract_second_word(t_cub *cub, char **line);
 long	my_atoi(t_cub *cub, const char *str);
 void	freetab(void **tab);
+bool	empty_line(char *line);
 
 #endif

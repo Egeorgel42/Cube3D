@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 16:21:58 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:44:38 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ void	error_init(t_cub *cub)
 	cub->errors[DOUBLE_PARAM] = ft_strdup("parameter is declared two times");
 	cub->errors[TOMANY_PARAM]
 		= ft_strdup("too many parameters, or seperated map");
+	cub->errors[PARAM_AFTER_MAP] = ft_strdup("parameter after map");
 	cub->errors[NOMAP] = ft_strdup("no map found");
+	cub->errors[NOPLAYER] = ft_strdup("no player found");
+	cub->errors[MULTIPLE_PLAYERS] = ft_strdup("multiple players found");
+	cub->errors[INVALID_MAP_CHARACTER] = ft_strdup("invalid map character");
+	cub->errors[MAPHOLE] = ft_strdup("map is not fully surrounded by walls");
 	cub->errors[ERRINT] = ft_strdup("parameter is longer than a int");
 	cub->errors[ERRMAX] = NULL;
 	while (++i < ERRMAX)

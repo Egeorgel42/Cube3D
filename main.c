@@ -6,11 +6,17 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 16:25:31 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:39:07 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	initialize(t_cub *cub)
+{
+	cub->params.player_pos.x = 0;
+	cub->params.player_pos.y = 0;
+}
 
 static void	free_cub(t_cub *cub)
 {
@@ -32,6 +38,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	error_init(&cub);
+	initialize(&cub);
 	get_params(&cub, argv[1]);
 	ft_printf("%s\n", cub.params.n_text);
 	ft_printf("%s\n", cub.params.s_text);
