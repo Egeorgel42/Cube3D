@@ -35,19 +35,11 @@ NAME = Cub3D
 
 all: $(NAME)
 
-# $(LIBFT):
-# 	cd libft && $(MAKE) bonus;
-
 $(NAME):$(OBJ) 
 	@make -C minilibx_opengl/ all
 	@make -C ./libft bonus
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	$(MAKE) clean
-
-# $(NAME): ${OBJ}
-# 	@make -C minilibx_opengl/ all
-# 	@make -C ./libft/
-# 	gcc $(OBJ) -o $(NAME) $(CFLAGS) ./libft/libft.a minilibx_opengl/libmlx.a $(LFLAGS) -g 
 
 .c.o: $(HDR) Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<
