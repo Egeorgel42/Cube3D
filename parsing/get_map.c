@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:40:02 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 23:28:07 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/24 10:56:46 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_map(t_cub *cub, char **file, int *map_end, unsigned int *longes
 			j++;
 		if (file[i][j] && !map_start)
 			map_start = i;
-		else if (file[i][j])
+		else if (file[i][j] && *map_end)
 			error(cub, TOMANY_PARAM, NULL);
 		if (!file[i][j] && map_start && !*map_end)
 			*map_end = i;
@@ -75,11 +75,11 @@ static char	**map_cp(t_cub *cub, char **file)
 
 	j = 0;
 	line_len = 0;
+	k = -1;
 	i = check_map(cub, file, &j, &line_len);
 	map_cp = malloc(sizeof(char *) * (j - i + *cub->params.res_y + 2));
 	if (!map_cp)
 		error(cub, ERRMAX, NULL);
-	k = -1;
 	while (++k <= *cub->params.res_x / 2)
 		map_cp[k] = get_line(cub, NULL, line_len);
 	j -= i;

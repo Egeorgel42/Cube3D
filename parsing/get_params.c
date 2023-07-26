@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 16:46:57 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:50:57 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,12 @@ void	get_params(t_cub *cub, char *filename)
 		error(cub, ERRFILE, NULL);
 	free(filename_end);
 	file = get_file(cub, filename);
-	cub->params.res_x = (int *)get_param(cub, file, "R");
-	cub->params.res_y = (int *)get_param(cub, file, "R");
-	cub->params.n_text = (char *)get_param(cub, file, "NO");
-	cub->params.s_text = (char *)get_param(cub, file, "SO");
-	cub->params.w_text = (char *)get_param(cub, file, "WE");
-	cub->params.e_text = (char *)get_param(cub, file, "EA");
-	cub->params.sprite_text = (char *)get_param(cub, file, "S");
-	cub->params.floor_color = (int *)get_param(cub, file, "F");
-	cub->params.ceiling_color = (int *)get_param(cub, file, "C");
+	cub->params.n_text = (char *)get_param(cub, file, "NO", STR_PARAM);
+	cub->params.s_text = (char *)get_param(cub, file, "SO", STR_PARAM);
+	cub->params.w_text = (char *)get_param(cub, file, "WE", STR_PARAM);
+	cub->params.e_text = (char *)get_param(cub, file, "EA", STR_PARAM);
+	cub->params.floor_color = (int *)get_param(cub, file, "F", INT_PARAM);
+	cub->params.ceiling_color = (int *)get_param(cub, file, "C", INT_PARAM);
 	get_map(cub, file);
 	freetab((void **)file);
 }

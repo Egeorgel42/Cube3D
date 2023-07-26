@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/23 16:49:36 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/07/24 11:24:44 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ parsing/error.c \
 parsing/param.c \
 utils/param_utils.c \
 utils/utils.c \
-parsing/get_map.c
+parsing/get_map.c \
+parsing/map_parse.c
 OBJ = ${SRC:.c=.o}
 
 LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz

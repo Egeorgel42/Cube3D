@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/23 23:05:10 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/24 10:54:50 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,10 @@ int	main(int argc, char **argv)
 	ft_printf("%s\n", cub.params.sprite_text);
 	ft_printf("%d\n", *cub.params.floor_color);
 	ft_printf("%d\n", *cub.params.ceiling_color);
+
+	int	i;
+	i = -1;
+	while (cub.params.map[++i])
+		ft_printf("%s\n", cub.params.map[i]);
 	free_cub(&cub);
 }
