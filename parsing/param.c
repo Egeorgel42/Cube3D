@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:43:32 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/25 15:36:49 by ory              ###   ########.fr       */
+/*   Updated: 2023/07/26 16:10:23 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*find_param(t_cub *cub, char **file, char *param_name)
 	return (res);
 }
 
-static void	*convert_param(t_cub *cub, char *res)
+static void	*convert_param(t_cub *cub, char *res, int param_type)
 {
 	int	i;
 	int	*int_res;
@@ -56,8 +56,10 @@ static void	*convert_param(t_cub *cub, char *res)
 	i = 0;
 	while (res[i] && (ft_isdigit(res[i]) || res[i] == ','))
 		i++;
-	if (res[i])
+	if (res[i] && param_type == STR_PARAM)
 		return ((void *)res);
+	else if (res[i])
+		error(cub, INVALID_PARAM, NULL);
 	int_res = malloc(sizeof(int));
 	if (!int_res)
 		error(cub, ERRMAX, NULL);
@@ -66,10 +68,10 @@ static void	*convert_param(t_cub *cub, char *res)
 	return ((void *)int_res);
 }
 
-void	*get_param(t_cub *cub, char **file, char *param_name)
+void	*get_param(t_cub *cub, char **file, char *param_name, int param_type)
 {
 	char	*res;
 
 	res = find_param(cub, file, param_name);
-	return (convert_param(cub, res));
+	return (convert_param(cub, res, param_type));
 }

@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/25 15:39:54 by ory              ###   ########.fr       */
+/*   Updated: 2023/07/26 16:09:12 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+typedef enum e_param_type
+{
+	INT_PARAM,
+	STR_PARAM
+}	t_param_type;
+
 /*ERRORS*/
 
 typedef enum e_err
@@ -28,6 +34,8 @@ typedef enum e_err
 	MISSING_PARAM,
 	INVALID_PARAM,
 	DOUBLE_PARAM,
+	TOMANY_PARAM,
+	NOMAP,
 	ERRINT,
 	ERRMAX,
 }	t_err;
@@ -43,13 +51,10 @@ typedef struct s_mlx
 typedef struct s_param
 {
 	char	**map;
-	int		*res_x;
-	int		*res_y;
 	char	*n_text;
 	char	*s_text;
 	char	*w_text;
 	char	*e_text;
-	char	*sprite_text;
 	int		*floor_color;
 	int		*ceiling_color;
 }	t_param;
@@ -63,8 +68,8 @@ typedef struct s_cub
 
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
-void	*get_param(t_cub *cub, char **file, char *param_name);
-//void	get_map(t_cub *cub, char **file);
+void	*get_param(t_cub *cub, char **file, char *param_name, int param_type);
+void	get_map(t_cub *cub, char **file);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
 
