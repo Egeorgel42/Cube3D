@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 14:50:12 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:42:04 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include <limits.h>
 # include "libft/libft.h"
 
-/*ERRORS*/
-
 typedef enum e_param_type
 {
 	INT_PARAM,
 	STR_PARAM
 }	t_param_type;
+
+/*ERRORS*/
 
 typedef enum e_err
 {
@@ -50,13 +50,10 @@ typedef struct s_mlx
 typedef struct s_param
 {
 	char	**map;
-	int		*res_x;
-	int		*res_y;
 	char	*n_text;
 	char	*s_text;
 	char	*w_text;
 	char	*e_text;
-	char	*sprite_text;
 	int		*floor_color;
 	int		*ceiling_color;
 }	t_param;
