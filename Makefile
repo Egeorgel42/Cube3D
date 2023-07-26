@@ -1,14 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/23 16:49:36 by egeorgel         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# # **************************************************************************** #
+# #                                                                              #
+# #                                                         :::      ::::::::    #
+# #    Makefile                                           :+:      :+:    :+:    #
+# #                                                     +:+ +:+         +:+      #
+# #    By: ory <ory@student.42.fr>                    +#+  +:+       +#+         #
+# #                                                 +#+#+#+#+#+   +#+            #
+# #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
+# #    Updated: 2023/07/25 15:29:27 by ory              ###   ########.fr        #
+# #                                                                              #
+# # **************************************************************************** #
 
 CC = gcc
 SRC = main.c \
@@ -17,11 +17,13 @@ parsing/error.c \
 parsing/param.c \
 utils/param_utils.c \
 utils/utils.c \
-parsing/get_map.c
+parsing/get_map.c\
+
 OBJ = ${SRC:.c=.o}
 
-LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
-#for linux
+#LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
+LFLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -Llibft -lft
+#for linux 
 #LFLAGS = -lmlx -framework OpenGL -framework AppKit
 #for Macos
 #uncomment whichever flag is needed depending on your OS
@@ -33,12 +35,19 @@ NAME = Cub3D
 
 all: $(NAME)
 
-$(LIBFT):
-	cd libft && $(MAKE) bonus;
+# $(LIBFT):
+# 	cd libft && $(MAKE) bonus;
 
-$(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME)
+$(NAME):$(OBJ) 
+	@make -C minilibx_opengl/ all
+	@make -C ./libft bonus
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	$(MAKE) clean
+
+# $(NAME): ${OBJ}
+# 	@make -C minilibx_opengl/ all
+# 	@make -C ./libft/
+# 	gcc $(OBJ) -o $(NAME) $(CFLAGS) ./libft/libft.a minilibx_opengl/libmlx.a $(LFLAGS) -g 
 
 .c.o: $(HDR) Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<
