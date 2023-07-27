@@ -6,11 +6,25 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 18:24:17 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:19:11 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	get_player(t_cub *cub, char **map, int i, int j)
+{
+	cub->player.pos.y = i;
+	cub->player.pos.x = j;
+	if (map[i][j] == 'E')
+		cub->player.angle = 0;
+	else if (map[i][j] == 'N')
+		cub->player.angle = 90;
+	else if (map[i][j] == 'W')
+		cub->player.angle = 180;
+	else
+		cub->player.angle = 270;
+}
 
 static void	check_element(t_cub *cub, char **map, int i, int j)
 {
@@ -21,12 +35,13 @@ static void	check_element(t_cub *cub, char **map, int i, int j)
 		error(cub, MAPHOLE, NULL);
 	}
 	if (!ft_strchr("10EWNS ", map[i][j]))
+	{
 		error(cub, INVALID_MAP_CHARACTER, NULL);
-	if (!cub->params.player_pos.x && !cub->params.player_pos.y
+	}
+	if (!cub->player.pos.x && !cub->player.pos.y
 		&& ft_strchr("EWNS", map[i][j]))
 	{
-		cub->params.player_pos.y = i;
-		cub->params.player_pos.x = j;
+		get_player(cub, map, i, j);
 	}
 	else if (ft_strchr("EWNS", map[i][j]))
 		error(cub, MULTIPLE_PLAYERS, NULL);
@@ -48,7 +63,7 @@ static void	map_parcour(t_cub *cub, char **map)
 		}
 		i++;
 	}
-	if (!cub->params.player_pos.x && !cub->params.player_pos.y)
+	if (!cub->player.pos.x && !cub->player.pos.y)
 		error(cub, NOPLAYER, NULL);
 }
 

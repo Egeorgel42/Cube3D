@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 18:44:38 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:22:02 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	error_init(t_cub *cub)
 	cub->errors = malloc(sizeof(char *) * (ERRMAX + 1));
 	if (!cub->errors)
 		error(cub, ERRMAX, NULL);
+	cub->errors[ERRMLX] = ft_strdup("MLX init error");
 	cub->errors[ERRFILE] = ft_strdup("Invalid file type");
 	cub->errors[MISSING_PARAM] = ft_strdup("file is missing the parameter ");
 	cub->errors[INVALID_PARAM] = ft_strdup("parameter is invalid");

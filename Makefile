@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/26 16:27:21 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/07/27 14:24:26 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
 CFLAGS = -Wall -Wextra -Werror -g -I. #-fsanitize=address
 LIBFT = libft/libft.a
 HDR = cub3d.h
-NAME = Cub3D
+NAME = cub3D
 
 all: $(NAME)
 

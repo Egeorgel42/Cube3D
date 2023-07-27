@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:40:02 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 18:45:25 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:16:19 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	check_map(t_cub *cub, char **file, int *map_end, unsigned int *longes
 	int		j;
 	int		map_start;
 
-	i = 0;
+	i = -1;
 	map_start = 0;
-	while (file[i])
+	while (file[++i])
 	{
 		j = 0;
 		if (ft_strlen(file[i]) > *longest_line)
@@ -33,7 +33,6 @@ static int	check_map(t_cub *cub, char **file, int *map_end, unsigned int *longes
 			error(cub, TOMANY_PARAM, NULL);
 		if (!file[i][j] && map_start && !*map_end)
 			*map_end = i;
-		i++;
 	}
 	if (!map_start)
 		error(cub, NOMAP, NULL);

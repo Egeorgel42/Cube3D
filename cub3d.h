@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 18:44:08 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:54:05 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "libft/libft.h"
 
 # define MAP_SIDE 2
+# define WIN_X 1900
+# define WIN_Y 1040
 
 typedef enum e_param_type
 {
@@ -32,6 +34,7 @@ typedef enum e_param_type
 
 typedef enum e_err
 {
+	ERRMLX,
 	ERRFILE,
 	MISSING_PARAM,
 	INVALID_PARAM,
@@ -51,10 +54,15 @@ typedef enum e_err
 
 typedef struct s_coordinates
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_coordinates;
 
+typedef struct s_player
+{
+	t_coordinates	pos;
+	double			angle;
+}	t_player;
 
 typedef struct s_mlx
 {
@@ -62,10 +70,15 @@ typedef struct s_mlx
 	void	*mlx_win;
 }	t_mlx;
 
+typedef struct s_minimap
+{
+	int	size_x;
+	int	size_y;
+}	t_minimap;
+
 typedef struct s_param
 {
 	char			**map;
-	t_coordinates	player_pos;
 	char			*n_text;
 	char			*s_text;
 	char			*w_text;
@@ -76,9 +89,11 @@ typedef struct s_param
 
 typedef struct s_cub
 {
-	t_mlx	mlx;
-	t_param	params;
-	char	**errors;
+	t_mlx		mlx;
+	t_param		params;
+	t_player	player;
+	t_minimap	minimap;
+	char		**errors;
 }	t_cub;
 
 /*PARSING*/
