@@ -6,13 +6,13 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:40:02 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/27 14:16:19 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:49:31 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_map(t_cub *cub, char **file, int *map_end, unsigned int *longest_line)
+static int	check_map(t_cub *cub, char **file, int *map_end, int *longest_line)
 {
 	int		i;
 	int		j;
@@ -23,8 +23,8 @@ static int	check_map(t_cub *cub, char **file, int *map_end, unsigned int *longes
 	while (file[++i])
 	{
 		j = 0;
-		if (ft_strlen(file[i]) > *longest_line)
-			*longest_line = ft_strlen(file[i]);
+		if ((int)ft_strlen(file[i]) > *longest_line)
+			*longest_line = (int)ft_strlen(file[i]);
 		while (file[i][j] && (file[i][j] == ' ' || file[i][j] == '\n'))
 			j++;
 		if (file[i][j] && !map_start)
@@ -41,7 +41,7 @@ static int	check_map(t_cub *cub, char **file, int *map_end, unsigned int *longes
 	return (map_start);
 }
 
-static char	*get_line(t_cub *cub, char *line, unsigned int line_len)
+static char	*get_line(t_cub *cub, char *line, int line_len)
 {
 	int		i;
 	int		j;
@@ -49,16 +49,16 @@ static char	*get_line(t_cub *cub, char *line, unsigned int line_len)
 
 	i = -1;
 	j = -1;
-	res = malloc(sizeof(char) * (MAP_SIDE + line_len + 3));
+	res = malloc(sizeof(char) * (line_len * 2 + 3));
 	if (!res)
 		error(cub, ERRMAX, NULL);
-	while (++i < MAP_SIDE / 2)
+	while (++i <= line_len / 2)
 		res[i] = ' ';
 	while (line && line[++j] && line[j] != '\n')
 		res[i + j] = line[j];
-	while (j < (int)line_len - 1)
+	while (j < line_len - 1)
 		res[i + j++] = ' ';
-	while (i < MAP_SIDE)
+	while (i < line_len)
 		res[i++ + j] = ' ';
 	res[i + j] = '\0';
 	return (res);
@@ -66,20 +66,20 @@ static char	*get_line(t_cub *cub, char *line, unsigned int line_len)
 
 static char	**map_cp(t_cub *cub, char **file)
 {
-	int				i;
-	int				j;
-	int				k;
-	unsigned int	line_len;
-	char			**map_cp;
+	int		i;
+	int		j;
+	int		k;
+	int		line_len;
+	char	**map_cp;
 
 	j = 0;
 	line_len = 0;
 	k = -1;
 	i = check_map(cub, file, &j, &line_len);
-	map_cp = malloc(sizeof(char *) * (j - i + MAP_SIDE + 3));
+	map_cp = malloc(sizeof(char *) * (j - i + cub->minimap.size_y + 3));
 	if (!map_cp)
 		error(cub, ERRMAX, NULL);
-	while (++k < MAP_SIDE / 2)
+	while (++k <= line_len / 2)
 		map_cp[k] = get_line(cub, NULL, line_len);
 	j -= i;
 	while (j-- > 0)
@@ -87,7 +87,7 @@ static char	**map_cp(t_cub *cub, char **file)
 		map_cp[k++] = get_line(cub, file[i], line_len);
 		i++;
 	}
-	while (++j < MAP_SIDE / 2)
+	while (++j <= line_len / 2)
 		map_cp[k++] = get_line(cub, NULL, line_len);
 	map_cp[k] = NULL;
 	return (map_cp);

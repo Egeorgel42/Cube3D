@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/27 14:54:05 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:30:40 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,20 @@ typedef enum e_err
 	MULTIPLE_PLAYERS,
 	INVALID_MAP_CHARACTER,
 	MAPHOLE,
-	ERRINT,
+	ERRCOLOR,
 	ERRMAX,
 }	t_err;
 
 /*STRUCT*/
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_coordinates
 {
@@ -72,8 +81,9 @@ typedef struct s_mlx
 
 typedef struct s_minimap
 {
-	int	size_x;
-	int	size_y;
+	t_img	img;
+	int		size_x;
+	int		size_y;
 }	t_minimap;
 
 typedef struct s_param
@@ -104,10 +114,16 @@ void	map_parse(t_cub *cub);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
 
+/*MINIMAP*/
+
 /*UTILS*/
+int		line_size(char *line);
+int		map_size(char **map);
 char	*extract_second_word(t_cub *cub, char **line);
-long	my_atoi(t_cub *cub, const char *str);
+int		get_color(t_cub *cub, const char *str);
 void	freetab(void **tab);
 bool	empty_line(char *line);
+void	create_image(t_mlx *mlx, t_img *img, int width, int height);
+void	pixel_to_img(t_img *img, int x, int y, int color);
 
 #endif

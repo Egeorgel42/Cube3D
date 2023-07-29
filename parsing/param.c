@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:43:32 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 18:29:38 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:03:50 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	*convert_param(t_cub *cub, char *res, int param_type)
 	int_res = malloc(sizeof(int));
 	if (!int_res)
 		error(cub, ERRMAX, NULL);
-	*int_res = my_atoi(cub, res);
+	*int_res = get_color(cub, res);
 	free(res);
 	return ((void *)int_res);
 }

@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:10:42 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/26 16:25:58 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:32:12 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,44 @@ char	*extract_second_word(t_cub *cub, char **line)
 	return (extracted);
 }
 
-long	my_atoi(t_cub *cub, const char *str)
+static int	get_color_subparam(t_cub *cub, const char *str, int *i)
+{
+	int	color;
+
+	color = 0;
+	while (str[*i] && str[*i] >= '0' && str[*i] <= '9')
+	{
+		color *= 10;
+		color += str[*i] - '0';
+		if (color > 255)
+			error(cub, ERRCOLOR, NULL);
+		(*i)++;
+	}
+	return (color);
+}
+
+int	get_color(t_cub *cub, const char *str)
 {
 	int	i;
 	int	res;
-	int	sign;
+	int	exponent;
 
-	i = -1;
+	i = 0;
 	res = 0;
-	sign = 1;
-	if (ft_strcmp(str, "-2147483648"))
-		return (INT16_MIN);
-	while (str[++i] && ((str[i] >= '0' && str[i] <= '9') || str[i] == ','))
+	exponent = 16;
+	if (str[i] && str[i] == ',')
+		error(cub, INVALID_PARAM, NULL);
+	while (str[i] && ((str[i] >= '0' && str[i] <= '9') || str[i] == ','))
 	{
-		if (str[i] == ',')
-			continue ;
-		res *= 10;
-		if (res < 0)
-			error(cub, ERRINT, NULL);
-		res += str[i] - '0';
-		if (res < 0)
-			error(cub, ERRINT, NULL);
+		if (str[i] == ',' && (!str[i + 1] || str[i + 1] == ','
+				|| !(str[i] >= '0' && str[i] <= '9')))
+			error(cub, INVALID_PARAM, NULL);
+		res += get_color_subparam(cub, str, &i) << exponent;
+		exponent -= 8;
+		if (str[i] && str[i] == ',' && exponent != -8)
+			i++;
 	}
-	return (res * sign);
+	if (exponent != -8 || str[i])
+		error(cub, INVALID_PARAM, NULL);
+	return (res);
 }
