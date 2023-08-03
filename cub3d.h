@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/28 17:30:40 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:53:46 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define MAP_SIDE 2
 # define WIN_X 1900
 # define WIN_Y 1040
+# define MINIMAP_WALL_COLOR 0xAA2f2b2b
+# define MINIMAP_FLOOR_COLOR 0xAAa49f9e
+# define MINIMAP_PLAYER_COLOR 0xAAFF0000
+# define MINIMAP_EMPTY_COLOR 0xFF000000
 
 typedef enum e_param_type
 {
@@ -63,8 +67,8 @@ typedef struct s_img
 
 typedef struct s_coordinates
 {
-	double	x;
-	double	y;
+	int	x;
+	int	y;
 }	t_coordinates;
 
 typedef struct s_player
@@ -115,15 +119,17 @@ void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
 
 /*MINIMAP*/
+void	minimap_initialize(t_cub *cub);
+void	minimap_update(t_cub *cub);
 
 /*UTILS*/
-int		line_size(char *line);
+int		line_size(char **line);
 int		map_size(char **map);
 char	*extract_second_word(t_cub *cub, char **line);
 int		get_color(t_cub *cub, const char *str);
 void	freetab(void **tab);
 bool	empty_line(char *line);
 void	create_image(t_mlx *mlx, t_img *img, int width, int height);
-void	pixel_to_img(t_img *img, int x, int y, int color);
+void	pixel_to_img(t_img *img, int x, int y, unsigned int color);
 
 #endif

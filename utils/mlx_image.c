@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 15:01:19 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/28 15:13:17 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/02 15:48:30 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_image(t_mlx *mlx, t_img *img, int x, int y)
 			&img->line_length, &img->endian);
 }
 
-void	pixel_to_img(t_img *img, int x, int y, int color)
+void	pixel_to_img(t_img *img, int x, int y, unsigned int color)
 {
 	char	*dst;
 

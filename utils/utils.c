@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 12:58:00 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/28 17:30:00 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:22:22 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,24 @@ bool	empty_line(char *line)
 	return (true);
 }
 
-int	line_size(char *line)
+int	line_size(char **line)
 {
 	int	i;
 	int	j;
+	int	k;
 
-	j = 0;
 	i = -1;
 	while (line[++i])
-		if (line[i] != ' ' && line != '\n')
-			j++;
-	return (j);
+	{
+		j = -1;
+		k = 0;
+		while (line[i][++j])
+			if (line[i][j] != ' ' && line[i][j] != '\n')
+				k++;
+		if (k > 0)
+			break ;
+	}
+	return (k);
 }
 
 int	map_size(char **map)

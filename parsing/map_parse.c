@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/27 14:19:11 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:09:45 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	get_player(t_cub *cub, char **map, int i, int j)
 {
-	cub->player.pos.y = i;
-	cub->player.pos.x = j;
+	cub->player.pos.y = i * 24 + 12;
+	cub->player.pos.x = j * 24 + 12;
 	if (map[i][j] == 'E')
 		cub->player.angle = 0;
 	else if (map[i][j] == 'N')

@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/07/28 15:06:10 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/08/03 16:54:46 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ utils/param_utils.c \
 utils/utils.c \
 parsing/get_map.c \
 parsing/map_parse.c \
-parsing/minimap.c \
+parsing/minimap_initialize.c \
+game/minimap_update.c \
 utils/mlx_image.c
 OBJ = ${SRC:.c=.o}
 

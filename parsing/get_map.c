@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:40:02 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/28 14:49:31 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/02 15:12:00 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	check_map(t_cub *cub, char **file, int *map_end, int *longest_line)
 	if (!map_start)
 		error(cub, NOMAP, NULL);
 	if (!*map_end)
-		*map_end = i;
+		*map_end = i - map_start;
 	return (map_start);
 }
 
@@ -76,18 +76,14 @@ static char	**map_cp(t_cub *cub, char **file)
 	line_len = 0;
 	k = -1;
 	i = check_map(cub, file, &j, &line_len);
-	map_cp = malloc(sizeof(char *) * (j - i + cub->minimap.size_y + 3));
+	map_cp = malloc(sizeof(char *) * (j * 2 + 3));
 	if (!map_cp)
 		error(cub, ERRMAX, NULL);
-	while (++k <= line_len / 2)
+	while (++k <= j / 2)
 		map_cp[k] = get_line(cub, NULL, line_len);
-	j -= i;
-	while (j-- > 0)
-	{
-		map_cp[k++] = get_line(cub, file[i], line_len);
-		i++;
-	}
-	while (++j <= line_len / 2)
+	while (k <= j + j / 2)
+		map_cp[k++] = get_line(cub, file[i++], line_len);
+	while (k <= j * 2)
 		map_cp[k++] = get_line(cub, NULL, line_len);
 	map_cp[k] = NULL;
 	return (map_cp);

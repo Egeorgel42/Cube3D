@@ -1,44 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap_initialize.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:51:32 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/28 17:32:19 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:55:00 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	create_minimap(t_cub *cub)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	create_image(&cub->mlx, &cub->minimap.img, cub->minimap.size_x,
-		cub->minimap.size_y);
-	while (++i < cub->minimap.size_y)
-	{
-		j = -1;
-		while (++j < cub->minimap.size_x)
-			pixel_to_img(&cub->minimap.img, j, i, 0x00FF0000);
-	}
-}
 
 static void	get_minimap_size(t_cub *cub)
 {
 	int	x;
 	int	y;
 
-	x = line_size(cub->params.map);
-	y = map_size(cub->params.map);
+	x = line_size(cub->params.map) * 24;
+	y = map_size(cub->params.map) * 24;
+	if (x > 24 * 17)
+		x = 24 * 17;
+	if (y > 24 * 10)
+		y = 24 * 10;
+	cub->minimap.size_x = x;
+	cub->minimap.size_y = y;
 }
 
-void	minimap(t_cub *cub)
+void	minimap_initialize(t_cub *cub)
 {
-	
-	create_minimap(cub);
+	get_minimap_size(cub);
+	create_image(&cub->mlx, &cub->minimap.img, cub->minimap.size_x,
+		cub->minimap.size_y);
 }
