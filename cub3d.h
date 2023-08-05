@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/03 16:53:46 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:14:35 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
+# include <math.h>
 # include "libft/libft.h"
 
 # define MAP_SIDE 2
@@ -27,6 +28,7 @@
 # define MINIMAP_FLOOR_COLOR 0xAAa49f9e
 # define MINIMAP_PLAYER_COLOR 0xAAFF0000
 # define MINIMAP_EMPTY_COLOR 0xFF000000
+# define PI 3.14159265358979323846
 
 typedef enum e_param_type
 {
@@ -65,10 +67,20 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_keys
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	r_right;
+	bool	r_left;
+}	t_keys;
+
 typedef struct s_coordinates
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_coordinates;
 
 typedef struct s_player
@@ -106,6 +118,7 @@ typedef struct s_cub
 	t_mlx		mlx;
 	t_param		params;
 	t_player	player;
+	t_keys		keys;
 	t_minimap	minimap;
 	char		**errors;
 }	t_cub;
@@ -117,6 +130,11 @@ void	get_map(t_cub *cub, char **file);
 void	map_parse(t_cub *cub);
 void	error_init(t_cub *cub);
 void	error(t_cub *cub, int err, char *arg);
+
+/*MOVEMENT*/
+bool	movement(t_cub *cub);
+int		key_release(int keycode, t_cub *cub);
+int		key_press(int keycode, t_cub *cub);
 
 /*MINIMAP*/
 void	minimap_initialize(t_cub *cub);

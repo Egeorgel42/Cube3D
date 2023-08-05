@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/08/03 16:54:46 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/08/05 20:45:02 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ parsing/get_map.c \
 parsing/map_parse.c \
 parsing/minimap_initialize.c \
 game/minimap_update.c \
-utils/mlx_image.c
+utils/mlx_image.c \
+game/keys.c \
+game/movement.c
 OBJ = ${SRC:.c=.o}
 
 LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
