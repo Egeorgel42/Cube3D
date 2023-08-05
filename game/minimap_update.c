@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:52:18 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/03 16:58:55 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:39:41 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ static unsigned int	get_minimap_color(t_cub *cub, int y, int x)
 	return (MINIMAP_EMPTY_COLOR);
 }
 
+static void	print_angle(t_cub *cub)
+{
+	int		i;
+	double	x;
+	double	y;
+
+	i = 0;
+	y = cub->minimap.size_y / 2;
+	x = cub->minimap.size_x / 2;
+	while (i++ < 20)
+	{
+		y -= cos(cub->player.angle / 180 * PI);
+		x -= sin(cub->player.angle / 180 * PI);
+		pixel_to_img(&cub->minimap.img, x, y, MINIMAP_PLAYER_COLOR);
+	}
+}
+
 static void	print_minimap(t_cub *cub)
 {
 	int	i;
@@ -82,6 +99,7 @@ void	minimap_update(t_cub *cub)
 {
 	print_minimap(cub);
 	player_to_minimap(cub);
+	print_angle(cub);
 	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.mlx_win,
 		cub->minimap.img.img, WIN_X - cub->minimap.size_x, 0);
 }
