@@ -6,14 +6,19 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:43:51 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/05 20:46:30 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:52:53 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//On top are the fonctions for Linux and below for mac.
+//the fonctions for mac are missing the left and right arrow.
+
 int	key_press(int keycode, t_cub *cub)
 {
+	if (keycode == 65307)
+		exit(0);
 	if (keycode == 0x0057 || keycode == 0x0077)
 		cub->keys.w = true;
 	if (keycode == 0x0041 || keycode == 0x0061)
@@ -45,3 +50,33 @@ int	key_release(int keycode, t_cub *cub)
 		cub->keys.r_right = false;
 	return (0);
 }
+
+/*
+int	keyrelease(int keycode, t_cub *cub)
+{
+	if (keycode == 13)
+		cub->keys.w = false;
+	if (keycode == 0)
+		cub->keys.a = false;
+	if (keycode == 1)
+		cub->keys.s = false;
+	if (keycode == 2)
+		cub->keys.d = false;
+	return (0);
+}
+
+int	keypress(int keycode, t_cub *cub)
+{
+	if (keycode == 53)
+		exit(0);
+	if (keycode == 13)
+		cub->keys.w = true;
+	if (keycode == 0)
+		cub->keys.a = true;
+	if (keycode == 1)
+		cub->keys.s = true;
+	if (keycode == 2)
+		cub->keys.d = true;
+	return (0);
+}
+*/
