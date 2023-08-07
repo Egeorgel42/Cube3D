@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:47:12 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/05 22:18:32 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:30:19 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,25 @@
 
 void	angled_movement(t_cub *cub, double radius, bool moving_y, bool *moved)
 {
+	double	x;
+	double	y;
+
 	if (moving_y)
 	{
-		cub->player.pos.x += radius * sin(cub->player.angle / 180 * PI);
-		cub->player.pos.y += radius * cos(cub->player.angle / 180 * PI);
+		x = radius * sin(cub->player.angle / 180 * PI);
+		y = radius * cos(cub->player.angle / 180 * PI);
 	}
 	else
 	{
-		cub->player.pos.x += radius * sin((cub->player.angle + 90) / 180 * PI);
-		cub->player.pos.y += radius * cos((cub->player.angle + 90) / 180 * PI);
+		x = radius * sin((cub->player.angle + 90) / 180 * PI);
+		y = radius * cos((cub->player.angle + 90) / 180 * PI);
 	}
+	if (cub->params.map[(int)(round(cub->player.pos.y + y) / 24)]
+		[(int)(round(cub->player.pos.x) / 24)] != '1')
+		cub->player.pos.y += y;
+	if (cub->params.map[(int)(round(cub->player.pos.y) / 24)]
+		[(int)(round(cub->player.pos.x + x) / 24)] != '1')
+		cub->player.pos.x += x;
 	*moved = true;
 }
 
