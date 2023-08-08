@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/05 21:43:09 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:43:04 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ static int	run_game(t_cub *cub)
 	return (0);
 }
 
+static int	end(void)
+{
+	exit(0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -72,6 +77,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (cub.params.map[++i])
 		ft_printf("%s\n", cub.params.map[i]);
+	mlx_hook(cub.mlx.mlx_win, 17, 0L, end, &cub);
 	mlx_hook(cub.mlx.mlx_win, 02, 1L << 0, key_press, &cub);
 	mlx_key_hook(cub.mlx.mlx_win, key_release, &cub);
 	mlx_loop_hook(cub.mlx.mlx, run_game, &cub);
