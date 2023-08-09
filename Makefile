@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
+#    By: ory <ory@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/08/05 20:45:02 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/08/09 15:30:09 by ory              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ game/keys.c \
 game/movement.c
 OBJ = ${SRC:.c=.o}
 
-LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
+#LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
 #for linux
-#LFLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -Llibft -lft
+LFLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -Llibft -lft
 #for Macos
 #uncomment whichever flag is needed depending on your OS
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/08 16:43:04 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:54:19 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static void	free_cub(t_cub *cub)
 static int	run_game(t_cub *cub)
 {
 	if (movement(cub))
+	{
+		mlx_clear_window(cub->mlx.mlx, cub->mlx.mlx_win);
 		minimap_update(cub);
+	}
 	return (0);
 }
 
