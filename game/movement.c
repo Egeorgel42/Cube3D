@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:47:12 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/07 22:50:07 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:08:26 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	angled_movement(t_cub *cub, double angle)
 	double	x;
 	double	y;
 
-	x = sin((cub->player.angle + angle) / 180 * PI);
-	y = cos((cub->player.angle + angle) / 180 * PI);
-	if (cub->params.map[(int)(round(cub->player.pos.y - y) / 24)]
-		[(int)(round(cub->player.pos.x) / 24)] != '1')
+	x = MV_SCALING * sin((cub->player.angle + angle) / 180 * PI);
+	y = MV_SCALING * cos((cub->player.angle + angle) / 180 * PI);
+	if (cub->params.map[(int)(round(cub->player.pos.y - y) / SIZE_OF_CASES)]
+		[(int)(round(cub->player.pos.x) / SIZE_OF_CASES)] != '1')
 		cub->player.pos.y -= y;
-	if (cub->params.map[(int)(round(cub->player.pos.y) / 24)]
-		[(int)(round(cub->player.pos.x - x) / 24)] != '1')
+	if (cub->params.map[(int)(round(cub->player.pos.y) / SIZE_OF_CASES)]
+		[(int)(round(cub->player.pos.x - x) / SIZE_OF_CASES)] != '1')
 		cub->player.pos.x -= x;
 }
 
@@ -63,11 +63,9 @@ static double	addup_movement(t_cub *cub)
 
 bool	movement(t_cub *cub)
 {
-	bool	moved;
 	double	angle;
 
 	angle = 0;
-	moved = false;
 	if (cub->keys.r_left)
 	{
 		cub->player.angle++;
@@ -84,6 +82,6 @@ bool	movement(t_cub *cub)
 	if (angle != -1)
 		angled_movement(cub, angle);
 	if (angle != -1 || cub->keys.r_left || cub->keys.r_right)
-		moved = true;
-	return (moved);
+		return (true);
+	return (false);
 }

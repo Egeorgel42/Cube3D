@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/05 22:14:35 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:10:04 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <math.h>
 # include "libft/libft.h"
 
-# define MAP_SIDE 2
+# define SIZE_OF_CASES 48
+//multiples of 24 pls
+# define MV_SCALING 2
 # define WIN_X 1900
 # define WIN_Y 1040
 # define MINIMAP_WALL_COLOR 0xAA2f2b2b

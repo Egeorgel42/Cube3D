@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:52:18 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/05 22:39:41 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:04:43 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ static void	print_minimap(t_cub *cub)
 	int	x;
 
 	i = -1;
-	y = cub->player.pos.y - cub->minimap.size_y / 2;
+	y = cub->player.pos.y / (SIZE_OF_CASES / 24) - cub->minimap.size_y / 2;
 	while (++i < cub->minimap.size_y)
 	{
 		j = -1;
-		x = cub->player.pos.x - cub->minimap.size_x / 2;
+		x = cub->player.pos.x / (SIZE_OF_CASES / 24) - cub->minimap.size_x / 2;
 		while (++j < cub->minimap.size_x)
 		{
 			pixel_to_img(&cub->minimap.img, j, i, get_minimap_color(cub, y, x));
