@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:43:51 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/09 15:50:43 by ory              ###   ########.fr       */
+/*   Updated: 2023/08/09 16:04:37 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ int	key_release(int keycode, t_cub *cub)
 		cub->keys.s = false;
 	if (keycode == 2)
 		cub->keys.d = false;
+	if (keycode == 123)
+		cub->keys.r_left = false;
+	if (keycode == 124)
+		cub->keys.r_right = false;
 	return (0);
 }
 
@@ -77,12 +81,9 @@ int	key_press(int keycode, t_cub *cub)
 		cub->keys.s = true;
 	if (keycode == 2)
 		cub->keys.d = true;
-
-		
-	if (keycode == 65361)
-		cub->keys.r_left = false;
-	if (keycode == 65363)
-		cub->keys.r_right = false;
-	
+	if (keycode == 123)
+		cub->keys.r_left = true;
+	if (keycode == 124)
+		cub->keys.r_right = true;
 	return (0);
 }

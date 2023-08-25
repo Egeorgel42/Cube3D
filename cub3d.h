@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/09 15:53:16 by ory              ###   ########.fr       */
+/*   Updated: 2023/08/23 18:31:50 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@
 # define SIZE_OF_CASES 48
 //multiples of 24 pls
 # define MV_SCALING 2
-# define WIN_X 1900
-# define WIN_Y 1040
+# define WIN_X 1500
+# define WIN_Y 900
 # define MINIMAP_WALL_COLOR 0xAA2f2b2b
 # define MINIMAP_FLOOR_COLOR 0xAAa49f9e
 # define MINIMAP_PLAYER_COLOR 0xAAFF0000
 # define MINIMAP_EMPTY_COLOR 0xFF000000
 # define PI 3.14159265358979323846
+
+# define FOV 60
+# define PLAYER_HEIGHT SIZE_OF_CASES / 2
 
 typedef enum e_param_type
 {
@@ -123,7 +126,21 @@ typedef struct s_cub
 	t_keys		keys;
 	t_minimap	minimap;
 	char		**errors;
+	double		ray_dir_x;
+	double		ray_dir_y;
 }	t_cub;
+
+typedef struct s_raycast_data
+{
+	double angle_raycast_start;
+	double angle_raycast_end;
+	double angle_ray;
+	double x;
+	double y;
+	double dist;
+
+}	t_raycast_data;
+
 
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
@@ -151,5 +168,8 @@ void	freetab(void **tab);
 bool	empty_line(char *line);
 void	create_image(t_mlx *mlx, t_img *img, int width, int height);
 void	pixel_to_img(t_img *img, int x, int y, unsigned int color);
+
+/*RENDERING*/
+void	render(t_cub *cub);
 
 #endif

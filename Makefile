@@ -6,7 +6,7 @@
 #    By: ory <ory@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/08/09 15:30:09 by ory              ###   ########.fr        #
+#    Updated: 2023/08/23 10:55:07 by ory              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ parsing/minimap_initialize.c \
 game/minimap_update.c \
 utils/mlx_image.c \
 game/keys.c \
-game/movement.c
+game/movement.c\
+render/render.c \
+
 OBJ = ${SRC:.c=.o}
 
 #LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz

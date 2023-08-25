@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_update.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:52:18 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/09 15:04:43 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:23:17 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ static unsigned int	get_minimap_color(t_cub *cub, int y, int x)
 	return (MINIMAP_EMPTY_COLOR);
 }
 
+// static void	print_angle(t_cub *cub)
+// {
+// 	int		i;
+// 	double	x;
+// 	double	y;
+
+// 	i = 0;
+// 	y = cub->minimap.size_y / 2;
+// 	x = cub->minimap.size_x / 2;
+// 	while (i++ < 20)
+// 	{
+// 		y -= cos(cub->player.angle / 180 * PI);
+// 		x -= sin(cub->player.angle / 180 * PI);
+// 		pixel_to_img(&cub->minimap.img, x, y, MINIMAP_PLAYER_COLOR);
+// 	}
+// }
+
 static void	print_angle(t_cub *cub)
 {
 	int		i;
@@ -67,8 +84,8 @@ static void	print_angle(t_cub *cub)
 	x = cub->minimap.size_x / 2;
 	while (i++ < 20)
 	{
-		y -= cos(cub->player.angle / 180 * PI);
-		x -= sin(cub->player.angle / 180 * PI);
+		y -= sin(cub->player.angle / 180 * PI);
+		x += cos(cub->player.angle / 180 * PI);
 		pixel_to_img(&cub->minimap.img, x, y, MINIMAP_PLAYER_COLOR);
 	}
 }

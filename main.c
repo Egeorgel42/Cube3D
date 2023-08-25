@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/09 15:54:19 by ory              ###   ########.fr       */
+/*   Updated: 2023/08/21 16:27:40 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	run_game(t_cub *cub)
 	{
 		mlx_clear_window(cub->mlx.mlx, cub->mlx.mlx_win);
 		minimap_update(cub);
+		render(cub);
 	}
 	return (0);
 }
@@ -75,6 +76,9 @@ int	main(int argc, char **argv)
 	ft_printf("%s\n", cub.params.e_text);
 	ft_printf("%d\n", *cub.params.floor_color);
 	ft_printf("%d\n", *cub.params.ceiling_color);
+
+	printf("angle = %f\n", cub.player.angle);
+	printf("pos x = %f pos y = %f\n", cub.player.pos.x, cub.player.pos.y);
 
 	int	i;
 	i = -1;
