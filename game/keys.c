@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:43:51 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/09 16:04:37 by ory              ###   ########.fr       */
+/*   Updated: 2023/08/25 16:09:58 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,43 @@
 
 //On top are the fonctions for Linux and below for mac.
 //the fonctions for mac are missing the left and right arrow.
+/*
+int	key_press(int keycode, t_cub *cub)
+{
+	if (keycode == 65307)
+		exit(0);
+	if (keycode == 0x0057 || keycode == 0x0077)
+		cub->keys.w = true;
+	if (keycode == 0x0041 || keycode == 0x0061)
+		cub->keys.a = true;
+	if (keycode == 0x0053 || keycode == 0x0073)
+		cub->keys.s = true;
+	if (keycode == 0x0044 || keycode == 0x0064)
+		cub->keys.d = true;
+	if (keycode == 65361)
+		cub->keys.r_left = true;
+	if (keycode == 65363)
+		cub->keys.r_right = true;
+	return (0);
+}
 
-// int	key_press(int keycode, t_cub *cub)
-// {
-// 	if (keycode == 65307)
-// 		exit(0);
-// 	if (keycode == 0x0057 || keycode == 0x0077)
-// 		cub->keys.w = true;
-// 	if (keycode == 0x0041 || keycode == 0x0061)
-// 		cub->keys.a = true;
-// 	if (keycode == 0x0053 || keycode == 0x0073)
-// 		cub->keys.s = true;
-// 	if (keycode == 0x0044 || keycode == 0x0064)
-// 		cub->keys.d = true;
-// 	if (keycode == 65361)
-// 		cub->keys.r_left = true;
-// 	if (keycode == 65363)
-// 		cub->keys.r_right = true;
-// 	return (0);
-// }
-
-// int	key_release(int keycode, t_cub *cub)
-// {
-// 	if (keycode == 0x0057 || keycode == 0x0077)
-// 		cub->keys.w = false;
-// 	if (keycode == 0x0041 || keycode == 0x0061)
-// 		cub->keys.a = false;
-// 	if (keycode == 0x0053 || keycode == 0x0073)
-// 		cub->keys.s = false;
-// 	if (keycode == 0x0044 || keycode == 0x0064)
-// 		cub->keys.d = false;
-// 	if (keycode == 65361)
-// 		cub->keys.r_left = false;
-// 	if (keycode == 65363)
-// 		cub->keys.r_right = false;
-// 	return (0);
-// }
-
+int	key_release(int keycode, t_cub *cub)
+{
+	if (keycode == 0x0057 || keycode == 0x0077)
+		cub->keys.w = false;
+	if (keycode == 0x0041 || keycode == 0x0061)
+		cub->keys.a = false;
+	if (keycode == 0x0053 || keycode == 0x0073)
+		cub->keys.s = false;
+	if (keycode == 0x0044 || keycode == 0x0064)
+		cub->keys.d = false;
+	if (keycode == 65361)
+		cub->keys.r_left = false;
+	if (keycode == 65363)
+		cub->keys.r_right = false;
+	return (0);
+}
+*/
 
 int	key_release(int keycode, t_cub *cub)
 {

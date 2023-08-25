@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:40:02 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/11 23:12:22 by ory              ###   ########.fr       */
+/*   Updated: 2023/08/25 16:07:18 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,15 @@ static char	*get_line(t_cub *cub, char *line, int line_len)
 
 	i = -1;
 	j = -1;
-	res = malloc(sizeof(char) * (line_len * 2 + 3));
+	res = malloc(sizeof(char) * (cub->minimap.size_x / 24 + line_len + 3));
 	if (!res)
 		error(cub, ERRMAX, NULL);
-	while (++i <= line_len / 2)
+	while (++i <= cub->minimap.size_x / 48)
 		res[i] = ' ';
 	while (line && line[++j] && line[j] != '\n')
 		res[i + j] = line[j];
-	while (j < line_len - 1)
+	while (i + j < line_len + cub->minimap.size_x / 24)
 		res[i + j++] = ' ';
-	while (i < line_len)
-		res[i++ + j] = ' ';
 	res[i + j] = '\0';
 	return (res);
 }
@@ -76,14 +74,15 @@ static char	**map_cp(t_cub *cub, char **file)
 	line_len = 0;
 	k = -1;
 	i = check_map(cub, file, &j, &line_len);
-	map_cp = malloc(sizeof(char *) * (j * 2 + 3));
+	get_minimap_size(cub, line_len, j);
+	map_cp = malloc(sizeof(char *) * (cub->minimap.size_y / 24 + j + 3));
 	if (!map_cp)
 		error(cub, ERRMAX, NULL);
-	while (++k <= j / 2)
+	while (++k <= cub->minimap.size_y / 48)
 		map_cp[k] = get_line(cub, NULL, line_len);
-	while (k <= j + j / 2)
+	while (k <= cub->minimap.size_y / 48 + j)
 		map_cp[k++] = get_line(cub, file[i++], line_len);
-	while (k <= j * 2)
+	while (k <= cub->minimap.size_y / 24 + j)
 		map_cp[k++] = get_line(cub, NULL, line_len);
 	map_cp[k] = NULL;
 	return (map_cp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/23 18:31:50 by ory              ###   ########.fr       */
+/*   Updated: 2023/08/25 16:10:38 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,12 @@ typedef struct s_cub
 
 typedef struct s_raycast_data
 {
-	double angle_raycast_start;
-	double angle_raycast_end;
-	double angle_ray;
-	double x;
-	double y;
-	double dist;
+	double	angle_raycast_start;
+	double	angle_raycast_end;
+	double	angle_ray;
+	double	x;
+	double	y;
+	double	dist;
 
 }	t_raycast_data;
 
@@ -156,6 +156,7 @@ int		key_release(int keycode, t_cub *cub);
 int		key_press(int keycode, t_cub *cub);
 
 /*MINIMAP*/
+void	get_minimap_size(t_cub *cub, int map_x_size, int map_y_size);
 void	minimap_initialize(t_cub *cub);
 void	minimap_update(t_cub *cub);
 
