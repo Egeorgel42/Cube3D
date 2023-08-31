@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/25 16:11:28 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:22:29 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ static void	initialize(t_cub *cub)
 	if (!cub->mlx.mlx)
 		error(cub, ERRMLX, NULL);
 	cub->mlx.mlx_win = mlx_new_window(cub->mlx.mlx, WIN_X, WIN_Y, "cub3D");
+	// cub->mlx.img = mlx_new_image(cub->mlx.mlx, WIN_X, WIN_Y);
+    	// cub->mlx.addr = mlx_get_data_addr(cub->mlx.img, &cub->mlx.bits_per_pixel, &cub->mlx.line_length,
+	// 							&cub->mlx.endian);
 	cub->player.pos.x = 0;
 	cub->player.pos.y = 0;
 	cub->keys.w = false;
@@ -79,6 +82,7 @@ int	main(int argc, char **argv)
 
 	printf("angle = %f\n", cub.player.angle);
 	printf("pos x = %f pos y = %f\n", cub.player.pos.x, cub.player.pos.y);
+	printf("map[5][6] = %c\n", cub.params.map[5][6]);
 
 	int	i;
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/25 16:10:38 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:42:31 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_mlx;
 
 typedef struct s_minimap
@@ -118,6 +123,11 @@ typedef struct s_param
 	int				*ceiling_color;
 }	t_param;
 
+typedef struct s_draw_wall
+{
+	int	side_color;
+}	t_draw_wall;
+
 typedef struct s_cub
 {
 	t_mlx		mlx;
@@ -128,6 +138,7 @@ typedef struct s_cub
 	char		**errors;
 	double		ray_dir_x;
 	double		ray_dir_y;
+	t_draw_wall	wall_data;
 }	t_cub;
 
 typedef struct s_raycast_data
@@ -139,8 +150,23 @@ typedef struct s_raycast_data
 	double	y;
 	double	dist;
 
-}	t_raycast_data;
+	// double first_horizontal_intersection_x;
+	// double first_horizontal_intersection_y;
 
+	// double first_vertical_intersection_x;
+	// double first_vertical_intersection_y;
+
+	double horizontal_step_x;
+	double horizontal_wall_point_x;
+	double horizontal_wall_point_y;
+	double horizontal_wall_dist;
+
+	double vertical_step_y;
+	double vertical_wall_point_x;
+	double vertical_wall_point_y;
+	double vertical_wall_dist;
+
+}	t_raycast_data;
 
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
