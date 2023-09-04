@@ -1,26 +1,45 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/09 23:10:47 by ory               #+#    #+#             */
-/*   Updated: 2023/08/31 18:17:26 by ory              ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 bool    find_wall(t_cub *cub, double x, double y)
 {
-        int i = x / (double)SIZE_OF_CASES;
-        int j = y / (double)SIZE_OF_CASES;
-   //  printf("i = %d j = %d angle = %f\n", i, j, cub->player.angle);
-        if (cub->params.map[j][i] != '0' && cub->params.map[j][i] != 'W' && cub->params.map[j][i] != 'S' && cub->params.map[j][i] != 'N' && cub->params.map[j][i] != 'O')
-                return (true);
+        // double x1;
+        // double y1;
+        // x1 = x + cub->ray_dir_x;
+        // y1 = y + cub->ray_dir_y;
+
+        int i = (int)(x / SIZE_OF_CASES);
+        int j = (int)(y / SIZE_OF_CASES);
+
+        // int i = (int)(x1 / (double)SIZE_OF_CASES);
+        // int j = (int)(y1 / (double)SIZE_OF_CASES);
+
+       // printf("in wall x %f y = %f\n", x, y);
+
+        printf("map[%d][%d] = %c\n", j, i, cub->params.map[j][i]);
+   printf("i = %d j = %d angle = %f\n", i, j, cub->player.angle);
+   printf("in wall ray x = %d ray y = %d\n", (int)x, (int)y);
+
+        // if (cub->params.map[j][i] != '0' && cub->params.map[j][i] != 'W' && cub->params.map[j][i] != 'S' && cub->params.map[j][i] != 'N' && cub->params.map[j][i] != 'E')
+        //         return (true);
+        // else
+        //         return (false);
+
+        // if (cub->params.map[j][i] == '1' || cub->params.map[(int)((y - cub->ray_dir_y) / SIZE_OF_CASES)][i] == '1' || cub->params.map[j][(int)(((x - cub->ray_dir_x) / SIZE_OF_CASES))])
+        //         return true;
+        // else
+        //         return false;
+
+        // printf("test = %d\n", (int)(x + 1 / SIZE_OF_CASES));
+        // printf("map[j][x + 1] = %c\n", cub->params.map[j][(int)((x + 1) / SIZE_OF_CASES)]);
+        // printf("map[j][x - 1] = %c\n", cub->params.map[j][(int)((x - 1) / SIZE_OF_CASES)]);
+        // printf("map[y + 1][i] = %c\n", cub->params.map[(int)((y + 1) / SIZE_OF_CASES)][i]);
+        // printf("map[y + 1][i] = %c\n", cub->params.map[(int)((y - 1) / SIZE_OF_CASES)][i]);
+
+
+        if (cub->params.map[j][(int)((x + 1.0) / SIZE_OF_CASES)] == '1' || cub->params.map[j][(int)((x - 1.0)/ SIZE_OF_CASES)] == '1' || cub->params.map[(int)((y + 1.0) / SIZE_OF_CASES)][i] == '1' || cub->params.map[(int)((y - 1.0) / SIZE_OF_CASES)][i] == '1')
+                return true;
         else
-                return (false);
+                return false;
         
 }
 
@@ -42,29 +61,25 @@ void draw_wall(int print_x, double ray_dist, t_cub *cub)
     for (int y = (int)wall_top; y < (int)wall_bottom; y++)
     {
        if (cub->wall_data.side_color == 0)
-                my_mlx_pixel_put(cub, print_x, y, 0xFF0000);
-               //mlx_pixel_put(cub->mlx.mlx, cub->mlx.mlx_win, print_x, y, 0xFF0000); // Red color (0xFF0000)
+               mlx_pixel_put(cub->mlx.mlx, cub->mlx.mlx_win, print_x, y, 0xFF0000); // Red color (0xFF0000)
+                //my_mlx_pixel_put(cub, print_x, y, 0xFF0000);
         else if (cub->wall_data.side_color == 1)
-               my_mlx_pixel_put(cub, print_x, y, 0xCC0000);
-                //mlx_pixel_put(cub->mlx.mlx, cub->mlx.mlx_win, print_x, y, 0xCC0000);
+                mlx_pixel_put(cub->mlx.mlx, cub->mlx.mlx_win, print_x, y, 0x00FF00); // green
+               //my_mlx_pixel_put(cub, print_x, y, 0xCC0000);
                 
     }
-    mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.mlx_win, cub->mlx.img, 0, 0);
+    //mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.mlx_win, cub->mlx.img, 0, 0);
 }
 
 
 void render(t_cub *cub) 
 {
         t_raycast_data ray;
-        cub->mlx.img = mlx_new_image(cub->mlx.mlx, WIN_X, WIN_Y);
-        cub->mlx.addr = mlx_get_data_addr(cub->mlx.img, &cub->mlx.bits_per_pixel, &cub->mlx.line_length,
-                                                                &cub->mlx.endian);      
-        int counter = 0;
-        int counter2 = 0;       
-        double first_horizontal_intersection_x;
-        double first_horizontal_intersection_y; 
-        double first_vertical_intersection_x;
-        double first_vertical_intersection_y;   
+        // cub->mlx.img = mlx_new_image(cub->mlx.mlx, WIN_X, WIN_Y);
+        // cub->mlx.addr = mlx_get_data_addr(cub->mlx.img, &cub->mlx.bits_per_pixel, &cub->mlx.line_length,
+        //                                                         &cub->mlx.endian);      
+                                                                
+          
         int print_x = 0;        
         ray.angle_raycast_start = cub->player.angle + FOV / 2;
         if (ray.angle_raycast_start >= 360)
@@ -72,161 +87,126 @@ void render(t_cub *cub)
         ray.angle_raycast_end = ray.angle_raycast_start - FOV;
         ray.angle_ray = (double)FOV / (double)WIN_X;
 
-      // printf("pos x = %f pos y = %f\n", cub->player.pos.x, cub->player.pos.y);
-//         int i = 0;
-//        ray.angle_raycast_start = cub->player.angle;
-//     while (i++ < 1)
-    while (ray.angle_raycast_start > ray.angle_raycast_end)
-    {
-        cub->ray_dir_x = cos(ray.angle_raycast_start * (PI / 180));
-        cub->ray_dir_y = -sin(ray.angle_raycast_start * (PI / 180));
-        ray.x = cub->player.pos.x;
-        ray.y = cub->player.pos.y;
+        double  angle_raycast_rad;
+        double dist_to_vertical = 0;
+        double dist_x;
+        double dist_y;
+        double wall_dist;
+        double dist_to_horizontal = 0;
+        int count;
+        double relative_pos_x = cub->player.pos.x / (double)SIZE_OF_CASES - (int)cub->player.pos.x / SIZE_OF_CASES;
+        double relative_pos_y = cub->player.pos.y / (double)SIZE_OF_CASES - (int)cub->player.pos.y / SIZE_OF_CASES;
+        //double i;
 
-        counter = 0;
-        counter2 = 0;
-        ray.horizontal_wall_dist = -1;
-        while (ray.x >= 0 && ray.y >= 0 && ray.x && ray.y) 
+        if (ray.angle_raycast_start < 270 && ray.angle_raycast_start >= 90)
+                dist_to_vertical = fabs(relative_pos_x * (double)SIZE_OF_CASES);
+        if (ray.angle_raycast_start < 90 || ray.angle_raycast_start >= 270)
+                dist_to_vertical = fabs(relative_pos_x * (double)SIZE_OF_CASES - (double)SIZE_OF_CASES);
+        if (ray.angle_raycast_start <= 180)
+                dist_to_horizontal = fabs(relative_pos_y * (double)SIZE_OF_CASES);
+        if (ray.angle_raycast_start > 180)
+                dist_to_horizontal = fabs(relative_pos_y * (double)SIZE_OF_CASES - (double)SIZE_OF_CASES);
+        printf("dist vertical = %f angle = %f\n", dist_to_vertical, ray.angle_raycast_start);
+        printf("dist dist_to_horizontal = %f\n", dist_to_horizontal);
+
+        printf("pos x = %f pos y = %f angle start = %f\n", cub->player.pos.x, cub->player.pos.y, ray.angle_raycast_start);
+
+        // int j = 0;
+        // ray.angle_raycast_start = cub->player.angle;
+        // while (j++ < 1)
+        while (ray.angle_raycast_start > ray.angle_raycast_end)
         {
-                //printf("ray x = %f ray y = %f\n", ray.x, ray.y);
-                if (find_wall(cub, ray.x, ray.y))
+                angle_raycast_rad = ray.angle_raycast_start * (PI / 180);
+                cub->ray_dir_x = cos(angle_raycast_rad);
+                cub->ray_dir_y = -sin(angle_raycast_rad);
+                ray.x = cub->player.pos.x;
+                ray.y = cub->player.pos.y;
+
+                count = 0;
+                //   i = 0;
+                if (count == 0)
                 {
-                        //printf("find wall\n");
-                        ray.horizontal_wall_dist = sqrt(pow(ray.x - cub->player.pos.x, (double)2) + pow(ray.y - cub->player.pos.y, (double)2));
-                        break;
+                if (cub->ray_dir_x == 0.000)
+                {
+                        printf("icicicicic\n");
+                        dist_x = 0.000;
                 }
-            if (fmod((int)ray.y, SIZE_OF_CASES) == 0)
-            {
-               // printf("counter = %d\n", counter);
-                //printf("horizontal ray x = %f ray y = %f posx = %f pos y = %f\n", ray.x, ray.y, cub->player.pos.x, cub->player.pos.y);
-                if (counter == 0)
+                else
+                        dist_x = fabs(dist_to_vertical / cub->ray_dir_x);
+                if (cub->ray_dir_y == 0.000)
+                        dist_y = 0.000;
+                else
+                        dist_y = fabs(dist_to_horizontal / cub->ray_dir_y);
+                }    
+                printf("1 distx = %f  disty = %f\n", dist_x, dist_y);
+                printf("ray x = %f  ray y = %f at start\n", ray.x, ray.y);
+
+                while (1) 
                 {
-                        first_horizontal_intersection_x = ray.x;
-                        first_horizontal_intersection_y = ray.y;
-                }
-                if (counter == 1)
-                        ray.horizontal_step_x = sqrt(pow(ray.x - first_horizontal_intersection_x, (double)2) + pow(ray.y - first_horizontal_intersection_y, (double)2));
-                counter++;
-                if (ray.angle_raycast_start < (double)180)
-                {
-                        
-                        if (find_wall(cub, ray.x, ray.y - (double)1))
+
+                        if (dist_x <= dist_y)
                         {
-                                ray.horizontal_wall_point_x = ray.x;
-                                ray.horizontal_wall_point_y = ray.y;
-                                ray.horizontal_wall_dist = sqrt(pow(ray.x - cub->player.pos.x, (double)2) + pow(ray.y - cub->player.pos.y, (double)2));
-                                break;
+                                ray.x += cub->ray_dir_x * dist_x;
+                                ray.y += cub->ray_dir_y * dist_x;
+                                if (find_wall(cub, ray.x, ray.y))
+                                {
+                                        wall_dist = (int)dist_x;
+                                        cub->wall_data.side_color = 0;
+                                        ray.previous_ray_type = 0;
+                                        printf("wall distx = %f angle = %f ray x = %f ray y %f\n", wall_dist, ray.angle_raycast_start, ray.x, ray.y);
+                                        break;
+                                }
+                                printf("dist verticale = %f\n", dist_to_vertical);
+                                dist_to_vertical = dist_to_vertical + (double)SIZE_OF_CASES;
+                                dist_x = fabs(dist_to_vertical / cub->ray_dir_x);
                         }
-                        
-                }
-                if (ray.angle_raycast_start >= (double)180)
-                {
-                        if (find_wall(cub, ray.x, ray.y + (double)1))
+                        else if (dist_y < dist_x)
                         {
-                                ray.horizontal_wall_point_x = ray.x;
-                                ray.horizontal_wall_point_y = ray.y;
-                                ray.horizontal_wall_dist = sqrt(pow(ray.x - cub->player.pos.x, (double)2) + pow(ray.y - cub->player.pos.y, (double)2));
-                                
-                                break;
+                                ray.x += cub->ray_dir_x * dist_y;
+                                ray.y += cub->ray_dir_y * dist_y;
+                                if (find_wall(cub, ray.x, ray.y))
+                                {
+                                        wall_dist = (int)dist_y;
+                                        ray.previous_ray_type = 1;
+                                        cub->wall_data.side_color = 1;
+                                        printf("wall distyy = %f angle = %f ray x = %f ray y %f\n", wall_dist, ray.angle_raycast_start, ray.x, ray.y);
+                                        break;
+                                }
+                                dist_to_horizontal = dist_to_horizontal + (double)SIZE_OF_CASES;
+                                dist_y = fabs(dist_to_horizontal / (cub->ray_dir_y));
                         }
-                }
-            }
-            if (counter < 2)
-            {
-                ray.x += cub->ray_dir_x;
-                ray.y += cub->ray_dir_y;
-            }
-            if (counter >= 2)
-            {
-                ray.x += ray.horizontal_step_x;
-                ray.y += (double)SIZE_OF_CASES;
-            }
-        }
 
-        ray.x = cub->player.pos.x;
-        ray.y = cub->player.pos.y;
-       ray.vertical_wall_dist = -1;
-        while (ray.x >= 0 && ray.y >= 0 && ray.x && ray.y)
-        {
-                if (find_wall(cub, ray.x, ray.y))
+                }       
+                printf("distx = %f  disty = %f at end \n", dist_x, dist_y);
+                printf("wall dist = %f\n", wall_dist);
+                //draw_wall(print_x, wall_dist, cub);
+
+
+                //to draw only the rays
+
+                // Calcul des coordonnées de départ du trait
+                double start_x = cub->player.pos.x;
+                double start_y = cub->player.pos.y;
+
+                // Calcul des coordonnées de fin du trait en fonction de la longueur wall_dist
+                double end_x = start_x + cos(angle_raycast_rad) * wall_dist;
+                double end_y = start_y - sin(angle_raycast_rad) * wall_dist;
+
+                // Dessin du trait en utilisant une boucle
+                int steps = (int)wall_dist;  // Nombre d'étapes à dessiner
+                double step_x = (end_x - start_x) / steps;  // Pas horizontal
+                double step_y = (end_y - start_y) / steps;  // Pas vertical
+
+                // Parcours des étapes pour dessiner le trait
+                for (int step = 0; step <= steps; step++)
                 {
+                    int x = (int)(start_x + step_x * step);
+                    int y = (int)(start_y + step_y * step);
 
-                        ray.vertical_wall_dist = sqrt(pow(ray.x - cub->player.pos.x, (double)2) + pow(ray.y - cub->player.pos.y, (double)2));
-                        break;
+                    mlx_pixel_put(cub->mlx.mlx, cub->mlx.mlx_win, x, y, 0xFFFFFF);  // Dessiner un pixel
                 }
 
-            if (fmod((int)ray.x, SIZE_OF_CASES) == 0)
-            {
-                //printf("counter2 = %d\n", counter2);
-                if (counter2 == 0)
-                {
-                        first_vertical_intersection_x = ray.x;
-                        first_vertical_intersection_y = ray.y;
-                }
-                if (counter2 == 1)
-                        ray.vertical_step_y = sqrt(pow(ray.x - first_vertical_intersection_x, (double)2) + pow(ray.y - first_vertical_intersection_y, (double)2));
-                counter2++;
-                if (ray.angle_raycast_start <+ (double)270 && ray.angle_raycast_start > (double)90)
-                {
-                        if (find_wall(cub, ray.x - (double)1, ray.y))
-                        {
-                                ray.vertical_wall_point_x = ray.x;
-                                ray.vertical_wall_point_y = ray.y;
-                                ray.vertical_wall_dist = sqrt(pow(ray.x - cub->player.pos.x, (double)2) + pow(ray.y - cub->player.pos.y, (double)2));
-                                break;
-                        }
-                }
-                if (ray.angle_raycast_start <= (double)90 && ray.angle_raycast_start >= (double)270)
-                {
-                        if (find_wall(cub, ray.x + (double)1, ray.y))
-                        {
-                                ray.vertical_wall_point_x = ray.x;
-                                ray.vertical_wall_point_y = ray.y;
-                                ray.vertical_wall_dist = sqrt(pow(ray.x - cub->player.pos.x, (double)2) + pow(ray.y - cub->player.pos.y, (double)2));
-                                break;
-                        }
-                }
-            }
-            if (counter2 < 2)
-            {
-                ray.x += cub->ray_dir_x;
-                ray.y += cub->ray_dir_y;
-            }
-            if (counter2 >= 2)
-            {
-                ray.x += (double)SIZE_OF_CASES;
-                ray.y += ray.vertical_step_y;
-            }
+                ray.angle_raycast_start -= ray.angle_ray;
+                print_x++;
         }
-
-       
-        if ((int)ray.horizontal_wall_dist > 0 && (int)ray.vertical_wall_dist > 0 && (int)ray.horizontal_wall_dist < (int)ray.vertical_wall_dist)
-        {
-                ray.dist = ray.horizontal_wall_dist;
-                cub->wall_data.side_color = 0;
-        }
-        else if ((int)ray.horizontal_wall_dist < 0)
-        {
-                ray.dist = ray.vertical_wall_dist;
-                cub->wall_data.side_color = 1;
-        }
-        else if ((int)ray.vertical_wall_dist < 0)
-        {
-                ray.dist = ray.horizontal_wall_dist;
-                 cub->wall_data.side_color = 0;
-        }
-        else if ((int)ray.vertical_wall_dist > 0 && (int)ray.horizontal_wall_dist >= (int)ray.vertical_wall_dist)
-        {
-                ray.dist = ray.vertical_wall_dist;
-                 cub->wall_data.side_color = 1;
-        }
-
-        //  printf("horizontal_wall_dist = %f\n", ray.horizontal_wall_dist);
-        //  printf("vertical_wall_dist = %f\n", ray.vertical_wall_dist);
-        //  printf("dist = %f\n", ray.dist);
-
-        draw_wall(print_x, ray.dist, cub);
-        ray.angle_raycast_start -= ray.angle_ray;
-        print_x++;
-    }
 }

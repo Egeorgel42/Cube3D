@@ -3,29 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:47:12 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/25 15:51:28 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:46 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// void	angled_movement(t_cub *cub, double angle)
+// {
+// 	double	x;
+// 	double	y;
+// 	double i;
+
+// 	x = MV_SCALING * cos((cub->player.angle + angle) / 180 * PI);
+// 	y = MV_SCALING * sin((cub->player.angle + angle) / 180 * PI);
+// 	if (angle < 180)
+//                 i = -1;
+//         if (angle > 180)
+//                 i = 1;
+// 	if (cub->params.map[(int)(round(cub->player.pos.y - y + i) / SIZE_OF_CASES)]
+// 		[(int)(round(cub->player.pos.x) / SIZE_OF_CASES)] != '1')
+// 		cub->player.pos.y -= y;
+// 	if (angle > 90 && angle < 270)
+//                 i = -1;
+//         if (angle < 90 || angle > 270)
+//                 i = 1;
+// 	if (cub->params.map[(int)(round(cub->player.pos.y) / SIZE_OF_CASES)]
+// 		[(int)(round(cub->player.pos.x + x + i) / SIZE_OF_CASES)] != '1')
+// 		cub->player.pos.x += x;
+// }
+
 void	angled_movement(t_cub *cub, double angle)
 {
 	double	x;
 	double	y;
+	double x2;
+	double y2;
 
 	x = MV_SCALING * cos((cub->player.angle + angle) / 180 * PI);
-	y = MV_SCALING * sin((cub->player.angle + angle) / 180 * PI);
-	if (cub->params.map[(int)(round(cub->player.pos.y - y) / SIZE_OF_CASES)]
+ 	y = MV_SCALING * sin((cub->player.angle + angle) / 180 * PI);
+	x2 = (MV_SCALING + 3) * cos((cub->player.angle + angle) / 180 * PI);
+	y2 = (MV_SCALING + 3) * sin((cub->player.angle + angle) / 180 * PI);
+	if (cub->params.map[(int)(round(cub->player.pos.y - y2) / SIZE_OF_CASES)]
 		[(int)(round(cub->player.pos.x) / SIZE_OF_CASES)] != '1')
 		cub->player.pos.y -= y;
 	if (cub->params.map[(int)(round(cub->player.pos.y) / SIZE_OF_CASES)]
-		[(int)(round(cub->player.pos.x + x) / SIZE_OF_CASES)] != '1')
+		[(int)(round(cub->player.pos.x + x2) / SIZE_OF_CASES)] != '1')
 		cub->player.pos.x += x;
 }
+
 
 static double	addup_movement(t_cub *cub)
 {

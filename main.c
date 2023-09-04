@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/31 12:22:29 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/04 11:01:18 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 
 	printf("angle = %f\n", cub.player.angle);
 	printf("pos x = %f pos y = %f\n", cub.player.pos.x, cub.player.pos.y);
-	printf("map[5][6] = %c\n", cub.params.map[5][6]);
+	printf("map[5][7] = %c\n", cub.params.map[5][7]);
 
 	int	i;
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/31 11:42:31 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/04 15:28:41 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ typedef struct s_mlx
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+
+	void	*img2;
+	char	*addr2;
 }	t_mlx;
 
 typedef struct s_minimap
@@ -150,6 +153,8 @@ typedef struct s_raycast_data
 	double	y;
 	double	dist;
 
+	int previous_ray_type;
+
 	// double first_horizontal_intersection_x;
 	// double first_horizontal_intersection_y;
 
@@ -165,6 +170,11 @@ typedef struct s_raycast_data
 	double vertical_wall_point_x;
 	double vertical_wall_point_y;
 	double vertical_wall_dist;
+
+	double dist_x_x;
+	double dist_x_y;
+	double dist_y_x;
+	double dist_y_y;
 
 }	t_raycast_data;
 
