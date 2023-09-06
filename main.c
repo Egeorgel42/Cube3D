@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/04 11:01:18 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/06 10:38:17 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	initialize(t_cub *cub)
 	cub->keys.d = false;
 	cub->keys.r_left = false;
 	cub->keys.r_right = false;
+
+	// cub->wall_data.west_color = 
+	// cub->wall_data.east_color = 
+	// cub->wall_data.north_color = 
+	// cub->wall_data.south_color = 
 }
 
 static void	free_cub(t_cub *cub)
@@ -41,6 +46,7 @@ static void	free_cub(t_cub *cub)
 	free(cub->params.w_text);
 	free(cub->params.ceiling_color);
 	free(cub->params.floor_color);
+	//mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);
 	mlx_destroy_image(cub->mlx.mlx, cub->minimap.img.img);
 	mlx_destroy_window(cub->mlx.mlx, cub->mlx.mlx_win);
 }
@@ -51,8 +57,8 @@ static int	run_game(t_cub *cub)
 	if (movement(cub))
 	{
 		mlx_clear_window(cub->mlx.mlx, cub->mlx.mlx_win);
-		minimap_update(cub);
 		render(cub);
+		minimap_update(cub);
 	}
 	return (0);
 }
@@ -72,7 +78,7 @@ int	main(int argc, char **argv)
 	initialize(&cub);
 	get_params(&cub, argv[1]);
 	minimap_initialize(&cub);
-	minimap_update(&cub);
+	//minimap_update(&cub);
 	ft_printf("%s\n", cub.params.n_text);
 	ft_printf("%s\n", cub.params.s_text);
 	ft_printf("%s\n", cub.params.w_text);
@@ -82,7 +88,7 @@ int	main(int argc, char **argv)
 
 	printf("angle = %f\n", cub.player.angle);
 	printf("pos x = %f pos y = %f\n", cub.player.pos.x, cub.player.pos.y);
-	printf("map[5][7] = %c\n", cub.params.map[5][7]);
+	printf("map[5][6] = %c\n", cub.params.map[5][6]);
 
 	int	i;
 	i = -1;

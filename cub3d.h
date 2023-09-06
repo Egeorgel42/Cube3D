@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/04 15:28:41 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/06 11:31:00 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,31 +129,27 @@ typedef struct s_param
 typedef struct s_draw_wall
 {
 	int	side_color;
+	int	south_color;
+	int	east_color;
+	int	west_color;
+	int	north_color;
 }	t_draw_wall;
-
-typedef struct s_cub
-{
-	t_mlx		mlx;
-	t_param		params;
-	t_player	player;
-	t_keys		keys;
-	t_minimap	minimap;
-	char		**errors;
-	double		ray_dir_x;
-	double		ray_dir_y;
-	t_draw_wall	wall_data;
-}	t_cub;
 
 typedef struct s_raycast_data
 {
 	double	angle_raycast_start;
 	double	angle_raycast_end;
 	double	angle_ray;
+	double  angle_raycast_rad;
 	double	x;
 	double	y;
 	double	dist;
 
+
 	int previous_ray_type;
+
+	double dist_x;
+	double dist_y;
 
 	// double first_horizontal_intersection_x;
 	// double first_horizontal_intersection_y;
@@ -177,6 +173,22 @@ typedef struct s_raycast_data
 	double dist_y_y;
 
 }	t_raycast_data;
+
+typedef struct s_cub
+{
+	t_mlx		mlx;
+	t_param		params;
+	t_player	player;
+	t_keys		keys;
+	t_minimap	minimap;
+	char		**errors;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	t_draw_wall	wall_data;
+	t_raycast_data	ray;
+}	t_cub;
+
+
 
 /*PARSING*/
 void	get_params(t_cub *cub, char *filename);
@@ -205,6 +217,7 @@ void	freetab(void **tab);
 bool	empty_line(char *line);
 void	create_image(t_mlx *mlx, t_img *img, int width, int height);
 void	pixel_to_img(t_img *img, int x, int y, unsigned int color);
+void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 
 /*RENDERING*/
 void	render(t_cub *cub);

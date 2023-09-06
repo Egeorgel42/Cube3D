@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:47:12 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/04 18:22:46 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/05 15:46:41 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	angled_movement(t_cub *cub, double angle)
 
 	x = MV_SCALING * cos((cub->player.angle + angle) / 180 * PI);
  	y = MV_SCALING * sin((cub->player.angle + angle) / 180 * PI);
-	x2 = (MV_SCALING + 3) * cos((cub->player.angle + angle) / 180 * PI);
-	y2 = (MV_SCALING + 3) * sin((cub->player.angle + angle) / 180 * PI);
+	x2 = (MV_SCALING + 5) * cos((cub->player.angle + angle) / 180 * PI);
+	y2 = (MV_SCALING + 5) * sin((cub->player.angle + angle) / 180 * PI);
 	if (cub->params.map[(int)(round(cub->player.pos.y - y2) / SIZE_OF_CASES)]
 		[(int)(round(cub->player.pos.x) / SIZE_OF_CASES)] != '1')
 		cub->player.pos.y -= y;
