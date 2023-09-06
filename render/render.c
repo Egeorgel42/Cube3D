@@ -35,7 +35,7 @@ bool    find_wall(t_cub *cub, double x, double y)
                 return false;
         // if (cub->params.map[j][i] == '0' && cub->params.map[j2][i2] == '1' && cub->params.map[j3][i3] == '1')
         //         return true;
-        if (cub->params.map[j][i] == '1') //|| cub->params.map[j1][i1] == '1'
+        if (cub->params.map[j][i] == '1' )//|| cub->params.map[j1][i1] == '1')
                 return true;
         else  
                 return false;
