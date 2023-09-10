@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/06 11:31:00 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/11 00:17:27 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,14 @@
 # define MINIMAP_PLAYER_COLOR 0xAAFF0000
 # define MINIMAP_EMPTY_COLOR 0xFF000000
 # define PI 3.14159265358979323846
+# define DEGRE_TO_RAD PI / 180
 
 # define FOV 60
 # define PLAYER_HEIGHT SIZE_OF_CASES / 2
+
+# define RAD_DEGRE 0.0174533
+# define DECREASE_ANGLE (FOV * (PI / 180))/WIN_X
+# define DIST_TO_PROJECTION_PLANE (WIN_X / 2) / (tan(FOV * DEGRE_TO_RAD/2))
 
 typedef enum e_param_type
 {
@@ -67,9 +72,9 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int	bits_per_pixel;
+	int	line_length;
+	int	endian;
 }	t_img;
 
 typedef struct s_keys
@@ -91,7 +96,8 @@ typedef struct s_coordinates
 typedef struct s_player
 {
 	t_coordinates	pos;
-	double			angle;
+	double		angle;
+	double		rad_angle;
 }	t_player;
 
 typedef struct s_mlx
@@ -103,9 +109,6 @@ typedef struct s_mlx
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-
-	void	*img2;
-	char	*addr2;
 }	t_mlx;
 
 typedef struct s_minimap
@@ -122,17 +125,35 @@ typedef struct s_param
 	char			*s_text;
 	char			*w_text;
 	char			*e_text;
+	t_img	img_north;
+	t_img	img_south;
+	t_img	img_west;
+	t_img	img_east;
+
 	int				*floor_color;
 	int				*ceiling_color;
 }	t_param;
 
-typedef struct s_draw_wall
+typedef struct s_texture
+{
+	t_img img;
+	int 		texdir; //direction NO, S, EA, WE de la texture
+	double		wallx; // valeur où le mur a été touché : coordonnée y si side == 0, coordonnée x si side == 1
+	int		texx; // coordonnée x de la texture
+	int		texy; // coordonée y de la texture
+	double		step; // indique de combien augmenter les coordonnées de la texture pour chaque pixel
+	double		texpos; // coordonnée de départ
+}	t_texture;
+
+typedef	struct s_draw_wall
 {
 	int	side_color;
-	int	south_color;
-	int	east_color;
-	int	west_color;
-	int	north_color;
+
+
+	// int	south_color;
+	// int	east_color;
+	// int	west_color;
+	// int	north_color;
 }	t_draw_wall;
 
 typedef struct s_raycast_data
@@ -144,12 +165,22 @@ typedef struct s_raycast_data
 	double	x;
 	double	y;
 	double	dist;
+	double	new_ray_angle_rad;
 
 
 	int previous_ray_type;
 
 	double dist_x;
 	double dist_y;
+
+	int mapx;
+	int mapy;
+	int side;
+	double dist_to_vertical;
+        double wall_dist;
+        double dist_to_horizontal;
+	int stepx;
+        int stepy;
 
 	// double first_horizontal_intersection_x;
 	// double first_horizontal_intersection_y;
@@ -186,6 +217,7 @@ typedef struct s_cub
 	double		ray_dir_y;
 	t_draw_wall	wall_data;
 	t_raycast_data	ray;
+
 }	t_cub;
 
 

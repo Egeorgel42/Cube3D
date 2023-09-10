@@ -6,11 +6,13 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/06 10:38:17 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/11 00:21:21 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//void	init_texture(t_cub *cub)
 
 static void	initialize(t_cub *cub)
 {
@@ -30,10 +32,10 @@ static void	initialize(t_cub *cub)
 	cub->keys.r_left = false;
 	cub->keys.r_right = false;
 
-	// cub->wall_data.west_color = 
-	// cub->wall_data.east_color = 
-	// cub->wall_data.north_color = 
-	// cub->wall_data.south_color = 
+	// cub->params.img_east;
+	// cub->params.img_north;
+	// cub->params.img_south;
+	// cub->params.img_west;
 }
 
 static void	free_cub(t_cub *cub)
