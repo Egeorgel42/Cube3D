@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/11 00:17:27 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/11 16:20:16 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef enum e_err
 	NOPLAYER,
 	MULTIPLE_PLAYERS,
 	INVALID_MAP_CHARACTER,
+	MAPSPACE,
 	MAPHOLE,
 	ERRCOLOR,
 	ERRMAX,

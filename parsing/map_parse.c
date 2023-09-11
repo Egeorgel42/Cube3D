@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/11 23:11:15 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/11 16:18:39 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ static void	get_player(t_cub *cub, char **map, int i, int j)
 		cub->player.angle = 270;
 	else
 		cub->player.angle = 0;
+}
+
+static void	check_map_space(t_cub *cub, char **map, int i)
+{
+	int		j;
+	
+	j = 0;
+	while (map[i][j] && map[i][j] == ' ')
+	{
+		j++;
+	}
+	while (map[i][j] && map[i][j] != ' ')
+	{
+		j++;
+	}
+	while (map[i][j] && map[i][j] == ' ')
+	{
+		j++;
+	}
+	if (map[i][j])
+		error(cub, MAPSPACE, NULL);
 }
 
 static void	check_element(t_cub *cub, char **map, int i, int j)
@@ -75,6 +96,7 @@ static void	map_parcour(t_cub *cub, char **map)
 			check_element(cub, map, i, j);
 			j++;
 		}
+		check_map_space(cub, map, i);
 		i++;
 	}
 	if (!cub->player.pos.x && !cub->player.pos.y)
