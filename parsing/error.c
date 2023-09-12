@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/11 16:13:02 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:33:13 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	error_init(t_cub *cub)
 	cub->errors[MULTIPLE_PLAYERS] = ft_strdup("multiple players found");
 	cub->errors[INVALID_MAP_CHARACTER] = ft_strdup("invalid map character");
 	cub->errors[MAPHOLE] = ft_strdup("map is not fully surrounded by walls");
-	cub->errors[MAPSPACE] = ft_strdup("space inside of map");
 	cub->errors[ERRCOLOR] = ft_strdup("color parameter is bigger than 255");
 	cub->errors[ERRMAX] = NULL;
 	while (++i < ERRMAX)

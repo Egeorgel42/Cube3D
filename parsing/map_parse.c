@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/11 16:18:39 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:31:10 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,28 @@ static void	get_player(t_cub *cub, char **map, int i, int j)
 		cub->player.angle = 0;
 }
 
-static void	check_map_space(t_cub *cub, char **map, int i)
+static void	spaces_to_0(char **map)
 {
-	int		j;
-	
-	j = 0;
-	while (map[i][j] && map[i][j] == ' ')
+	int	start;
+	int	end;
+	int	i;
+
+	i = -1;
+	while (map[++i])
 	{
-		j++;
+		start = 0;
+		end = ft_strlen(map[i]) - 1;
+		while (map[i][start] && map[i][start] != '1')
+			start++;
+		while (end >= 0 && map[i][end] != '1')
+			end--;
+		while (map[i][start] && start < end)
+		{
+			if (map[i][start] == ' ')
+				map[i][start] = '0';
+			start++;
+		}
 	}
-	while (map[i][j] && map[i][j] != ' ')
-	{
-		j++;
-	}
-	while (map[i][j] && map[i][j] == ' ')
-	{
-		j++;
-	}
-	if (map[i][j])
-		error(cub, MAPSPACE, NULL);
 }
 
 static void	check_element(t_cub *cub, char **map, int i, int j)
@@ -96,7 +99,6 @@ static void	map_parcour(t_cub *cub, char **map)
 			check_element(cub, map, i, j);
 			j++;
 		}
-		check_map_space(cub, map, i);
 		i++;
 	}
 	if (!cub->player.pos.x && !cub->player.pos.y)
@@ -108,5 +110,6 @@ void	map_parse(t_cub *cub)
 	char	**map;
 
 	map = cub->params.map;
+	spaces_to_0(map);
 	map_parcour(cub, map);
 }
