@@ -6,13 +6,11 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/11 00:21:21 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/14 12:51:31 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//void	init_texture(t_cub *cub)
 
 static void	initialize(t_cub *cub)
 {
@@ -20,9 +18,8 @@ static void	initialize(t_cub *cub)
 	if (!cub->mlx.mlx)
 		error(cub, ERRMLX, NULL);
 	cub->mlx.mlx_win = mlx_new_window(cub->mlx.mlx, WIN_X, WIN_Y, "cub3D");
-	// cub->mlx.img = mlx_new_image(cub->mlx.mlx, WIN_X, WIN_Y);
-    	// cub->mlx.addr = mlx_get_data_addr(cub->mlx.img, &cub->mlx.bits_per_pixel, &cub->mlx.line_length,
-	// 							&cub->mlx.endian);
+	if (SIZE_OF_CASES % 24 != 0)
+		error(cub, INVALID_PARAM, " SIZE_OF_CASES must be multiple of 24 in cub3d.h");
 	cub->player.pos.x = 0;
 	cub->player.pos.y = 0;
 	cub->keys.w = false;
@@ -31,11 +28,6 @@ static void	initialize(t_cub *cub)
 	cub->keys.d = false;
 	cub->keys.r_left = false;
 	cub->keys.r_right = false;
-
-	// cub->params.img_east;
-	// cub->params.img_north;
-	// cub->params.img_south;
-	// cub->params.img_west;
 }
 
 static void	free_cub(t_cub *cub)
@@ -48,7 +40,10 @@ static void	free_cub(t_cub *cub)
 	free(cub->params.w_text);
 	free(cub->params.ceiling_color);
 	free(cub->params.floor_color);
-	//mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);
+	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_east.img.img);
+	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_north.img.img);
+	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_south.img.img);
+	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_west.img.img);
 	mlx_destroy_image(cub->mlx.mlx, cub->minimap.img.img);
 	mlx_destroy_window(cub->mlx.mlx, cub->mlx.mlx_win);
 }
@@ -74,28 +69,14 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	if (argc < 2)
-		return (0);
 	error_init(&cub);
+	if (argc != 2)
+		error(&cub, NB_ARG, NULL);
 	initialize(&cub);
 	get_params(&cub, argv[1]);
 	minimap_initialize(&cub);
-	//minimap_update(&cub);
-	ft_printf("%s\n", cub.params.n_text);
-	ft_printf("%s\n", cub.params.s_text);
-	ft_printf("%s\n", cub.params.w_text);
-	ft_printf("%s\n", cub.params.e_text);
-	ft_printf("%d\n", *cub.params.floor_color);
-	ft_printf("%d\n", *cub.params.ceiling_color);
-
-	printf("angle = %f\n", cub.player.angle);
-	printf("pos x = %f pos y = %f\n", cub.player.pos.x, cub.player.pos.y);
-	printf("map[5][6] = %c\n", cub.params.map[5][6]);
-
-	int	i;
-	i = -1;
-	while (cub.params.map[++i])
-		ft_printf("%s\n", cub.params.map[i]);
+	render(&cub);
+	minimap_update(&cub);
 	mlx_hook(cub.mlx.mlx_win, 17, 0L, end, &cub);
 	mlx_hook(cub.mlx.mlx_win, 02, 1L << 0, key_press, &cub);
 	mlx_key_hook(cub.mlx.mlx_win, key_release, &cub);

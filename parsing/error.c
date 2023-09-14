@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/07/28 16:01:06 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:00:04 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ void	error(t_cub *cub, int err, char *arg)
 
 void	error_init(t_cub *cub)
 {
-	int	i;
-
-	i = -1;
+	cub->i_error = -1;
 	cub->errors = malloc(sizeof(char *) * (ERRMAX + 1));
 	if (!cub->errors)
 		error(cub, ERRMAX, NULL);
@@ -49,8 +47,11 @@ void	error_init(t_cub *cub)
 	cub->errors[INVALID_MAP_CHARACTER] = ft_strdup("invalid map character");
 	cub->errors[MAPHOLE] = ft_strdup("map is not fully surrounded by walls");
 	cub->errors[ERRCOLOR] = ft_strdup("color parameter is bigger than 255");
+	cub->errors[NB_ARG] = ft_strdup("less or more than 1 argument to ./cub3D");
+	cub->errors[ERR_TEXT_FILE] = ft_strdup("impossible to get texture file");
+	cub->errors[ERR_TEXT_SIZE] = ft_strdup("texture size error");
 	cub->errors[ERRMAX] = NULL;
-	while (++i < ERRMAX)
-		if (!cub->errors[i])
+	while (++cub->i_error < ERRMAX)
+		if (!cub->errors[cub->i_error])
 			error(cub, ERRMAX, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/11 00:17:27 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/14 12:33:01 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <math.h>
 # include "libft/libft.h"
 
-# define SIZE_OF_CASES 48
+# define SIZE_OF_CASES 240
 //multiples of 24 pls
-# define MV_SCALING 2
+# define MV_SCALING SIZE_OF_CASES / 24
 # define WIN_X 1500
 # define WIN_Y 900
 # define MINIMAP_WALL_COLOR 0xAA2f2b2b
@@ -63,6 +63,9 @@ typedef enum e_err
 	INVALID_MAP_CHARACTER,
 	MAPHOLE,
 	ERRCOLOR,
+	NB_ARG,
+	ERR_TEXT_FILE,
+	ERR_TEXT_SIZE,
 	ERRMAX,
 }	t_err;
 
@@ -75,6 +78,8 @@ typedef struct s_img
 	int	bits_per_pixel;
 	int	line_length;
 	int	endian;
+	int	width;
+	int	height;
 }	t_img;
 
 typedef struct s_keys
@@ -91,6 +96,9 @@ typedef struct s_coordinates
 {
 	double	x;
 	double	y;
+	int	dist_to_wall_limit;
+	double	check_x;
+	double	check_y;
 }	t_coordinates;
 
 typedef struct s_player
@@ -118,6 +126,14 @@ typedef struct s_minimap
 	int		size_y;
 }	t_minimap;
 
+typedef struct s_texture
+{
+	t_img		img;
+	double		wallx;
+	double		texx;
+	double		texy;
+}	t_texture;
+
 typedef struct s_param
 {
 	char			**map;
@@ -125,50 +141,42 @@ typedef struct s_param
 	char			*s_text;
 	char			*w_text;
 	char			*e_text;
-	t_img	img_north;
-	t_img	img_south;
-	t_img	img_west;
-	t_img	img_east;
+	t_texture	texture_north;
+	t_texture	texture_south;
+	t_texture	texture_west;
+	t_texture	texture_east;
+	t_texture	*texture; // to switch texture
 
 	int				*floor_color;
 	int				*ceiling_color;
 }	t_param;
 
-typedef struct s_texture
-{
-	t_img img;
-	int 		texdir; //direction NO, S, EA, WE de la texture
-	double		wallx; // valeur où le mur a été touché : coordonnée y si side == 0, coordonnée x si side == 1
-	int		texx; // coordonnée x de la texture
-	int		texy; // coordonée y de la texture
-	double		step; // indique de combien augmenter les coordonnées de la texture pour chaque pixel
-	double		texpos; // coordonnée de départ
-}	t_texture;
 
 typedef	struct s_draw_wall
 {
 	int	side_color;
 
 
-	// int	south_color;
-	// int	east_color;
-	// int	west_color;
-	// int	north_color;
+	double	wall_height;
+        double 	wall_top;
+        double	wall_bottom;
+        int	y;
 }	t_draw_wall;
 
 typedef struct s_raycast_data
 {
+	double		ray_dir_x;
+	double		ray_dir_y;
 	double	angle_raycast_start;
 	double	angle_raycast_end;
-	double	angle_ray;
-	double  angle_raycast_rad;
 	double	x;
 	double	y;
-	double	dist;
+	double  angle_raycast_rad;
 	double	new_ray_angle_rad;
+	int	print_x;
+	int	draw_y;
 
 
-	int previous_ray_type;
 
 	double dist_x;
 	double dist_y;
@@ -182,27 +190,6 @@ typedef struct s_raycast_data
 	int stepx;
         int stepy;
 
-	// double first_horizontal_intersection_x;
-	// double first_horizontal_intersection_y;
-
-	// double first_vertical_intersection_x;
-	// double first_vertical_intersection_y;
-
-	double horizontal_step_x;
-	double horizontal_wall_point_x;
-	double horizontal_wall_point_y;
-	double horizontal_wall_dist;
-
-	double vertical_step_y;
-	double vertical_wall_point_x;
-	double vertical_wall_point_y;
-	double vertical_wall_dist;
-
-	double dist_x_x;
-	double dist_x_y;
-	double dist_y_x;
-	double dist_y_y;
-
 }	t_raycast_data;
 
 typedef struct s_cub
@@ -213,10 +200,9 @@ typedef struct s_cub
 	t_keys		keys;
 	t_minimap	minimap;
 	char		**errors;
-	double		ray_dir_x;
-	double		ray_dir_y;
 	t_draw_wall	wall_data;
 	t_raycast_data	ray;
+	int		i_error;
 
 }	t_cub;
 
@@ -232,8 +218,8 @@ void	error(t_cub *cub, int err, char *arg);
 
 /*MOVEMENT*/
 bool	movement(t_cub *cub);
-int		key_release(int keycode, t_cub *cub);
-int		key_press(int keycode, t_cub *cub);
+int	key_release(int keycode, t_cub *cub);
+int	key_press(int keycode, t_cub *cub);
 
 /*MINIMAP*/
 void	get_minimap_size(t_cub *cub, int map_x_size, int map_y_size);
@@ -241,10 +227,10 @@ void	minimap_initialize(t_cub *cub);
 void	minimap_update(t_cub *cub);
 
 /*UTILS*/
-int		line_size(char **line);
-int		map_size(char **map);
+int	line_size(char **line);
+int	map_size(char **map);
 char	*extract_second_word(t_cub *cub, char **line);
-int		get_color(t_cub *cub, const char *str);
+int	get_color(t_cub *cub, const char *str);
 void	freetab(void **tab);
 bool	empty_line(char *line);
 void	create_image(t_mlx *mlx, t_img *img, int width, int height);
@@ -253,5 +239,19 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 
 /*RENDERING*/
 void	render(t_cub *cub);
+void    set_texture(t_cub *cub);
+int	cast_ray_horizontal(t_cub *cub);
+int	cast_ray_vertical(t_cub *cub);
+void	find_dist(t_cub *cub);
+void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
+void    pixel_to_image(t_cub *cub);
+void    draw_floor(t_cub *cub);
+void	draw_sky(t_cub *cub);
+void	draw_wall(double ray_dist, t_cub *cub);
+void    init_wall(t_cub *cub, double ray_dist);
+void    init_horizontal_step_distance(t_cub *cub);
+void    init_vertical_step_distance(t_cub *cub);
+void    ray_init_step_distance(t_cub *cub);
+void    ray_var_init(t_cub * cub);
 
 #endif
