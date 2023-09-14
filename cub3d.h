@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 16:44:41 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:48:45 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,44 +160,39 @@ typedef	struct s_draw_wall
 
 typedef struct s_raycast_data
 {
-	double		ray_dir_x;
-	double		ray_dir_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	double	angle_raycast_start;
 	double	angle_raycast_end;
 	double	x;
 	double	y;
-	double  angle_raycast_rad;
+	double	angle_raycast_rad;
 	double	new_ray_angle_rad;
-	int	print_x;
-	int	draw_y;
-
-
-
-	double dist_x;
-	double dist_y;
-
-	int mapx;
-	int mapy;
-	int side;
-	double dist_to_vertical;
-        double wall_dist;
-        double dist_to_horizontal;
-	int stepx;
-        int stepy;
-
+	int		print_x;
+	int		draw_y;
+	double	dist_x;
+	double	dist_y;
+	int		mapx;
+	int		mapy;
+	int		side;
+	double	dist_to_vertical;
+	double	wall_dist;
+	double	dist_to_horizontal;
+	int		stepx;
+	int		stepy;
 }	t_raycast_data;
 
 typedef struct s_cub
 {
-	t_mlx		mlx;
-	t_param		params;
-	t_player	player;
-	t_keys		keys;
-	t_minimap	minimap;
-	char		**errors;
-	t_draw_wall	wall_data;
+	t_mlx			mlx;
+	t_param			params;
+	t_player		player;
+	t_keys			keys;
+	t_minimap		minimap;
+	char			**errors;
+	t_draw_wall		wall_data;
 	t_raycast_data	ray;
-	t_img		view;
+	t_img			view;
 }	t_cub;
 
 
@@ -212,8 +207,8 @@ void	error(t_cub *cub, int err, char *arg);
 
 /*MOVEMENT*/
 bool	movement(t_cub *cub);
-int	key_release(int keycode, t_cub *cub);
-int	key_press(int keycode, t_cub *cub);
+int		key_release(int keycode, t_cub *cub);
+int		key_press(int keycode, t_cub *cub);
 
 /*MINIMAP*/
 void	get_minimap_size(t_cub *cub, int map_x_size, int map_y_size);
@@ -221,10 +216,10 @@ void	minimap_initialize(t_cub *cub);
 void	minimap_update(t_cub *cub);
 
 /*UTILS*/
-int	line_size(char **line);
-int	map_size(char **map);
+int		line_size(char **line);
+int		map_size(char **map);
 char	*extract_second_word(t_cub *cub, char **line);
-int	get_color(t_cub *cub, const char *str);
+int		get_color(t_cub *cub, const char *str);
 void	freetab(void **tab);
 bool	empty_line(char *line);
 void	create_image(t_mlx *mlx, t_img *img, int width, int height);
@@ -234,8 +229,8 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 /*RENDERING*/
 void	render(t_cub *cub);
 void    set_texture(t_cub *cub);
-int	cast_ray_horizontal(t_cub *cub);
-int	cast_ray_vertical(t_cub *cub);
+int		cast_ray_horizontal(t_cub *cub);
+int		cast_ray_vertical(t_cub *cub);
 void	find_dist(t_cub *cub);
 void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void    pixel_to_image(t_cub *cub);
