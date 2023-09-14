@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:13:05 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 15:39:06 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:44:27 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,18 @@ void	error(t_cub *cub, int err, char *arg)
 	exit(1);
 }
 
+void	check_err_malloc(t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	while (++i < ERRMAX)
+		if (!cub->errors[i])
+			error(cub, ERRMAX, NULL);
+}
+
 void	error_init(t_cub *cub)
 {
-	cub->i_error = -1;
 	cub->errors = malloc(sizeof(char *) * (ERRMAX + 1));
 	if (!cub->errors)
 		error(cub, ERRMAX, NULL);
@@ -51,7 +60,5 @@ void	error_init(t_cub *cub)
 	cub->errors[ERR_TEXT_FILE] = ft_strdup("impossible to get texture file");
 	cub->errors[ERR_TEXT_SIZE] = ft_strdup("texture size error");
 	cub->errors[ERRMAX] = NULL;
-	while (++cub->i_error < ERRMAX)
-		if (!cub->errors[cub->i_error])
-			error(cub, ERRMAX, NULL);
+	check_err_malloc(cub);
 }

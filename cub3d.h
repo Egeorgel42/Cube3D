@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 16:39:59 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:44:41 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct s_coordinates
 typedef struct s_player
 {
 	t_coordinates	pos;
-	double		angle;
-	double		rad_angle;
+	double			angle;
+	double			rad_angle;
 }	t_player;
 
 typedef struct s_mlx
@@ -153,9 +153,9 @@ typedef	struct s_draw_wall
 
 
 	double	wall_height;
-        double 	wall_top;
-        double	wall_bottom;
-        int	y;
+	double 	wall_top;
+	double	wall_bottom;
+	int	y;
 }	t_draw_wall;
 
 typedef struct s_raycast_data
@@ -198,8 +198,6 @@ typedef struct s_cub
 	t_draw_wall	wall_data;
 	t_raycast_data	ray;
 	t_img		view;
-	int		i_error;
-
 }	t_cub;
 
 
