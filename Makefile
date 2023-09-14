@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/09/14 15:41:17 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/09/14 16:39:54 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ all: $(NAME)
 $(NAME):$(OBJ) 
 	@make -C ./libft bonus
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
-	$(MAKE) clean
 
 .c.o: $(HDR) Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<

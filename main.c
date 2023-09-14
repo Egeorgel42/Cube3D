@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:57 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 12:51:31 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/14 16:37:03 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	initialize(t_cub *cub)
 	cub->keys.d = false;
 	cub->keys.r_left = false;
 	cub->keys.r_right = false;
+	cub->WIN_X = WIN_X;
+	cub->WIN_Y = WIN_Y;
 }
 
 static void	free_cub(t_cub *cub)
@@ -53,8 +55,9 @@ static int	run_game(t_cub *cub)
 {
 	if (movement(cub))
 	{
-		mlx_clear_window(cub->mlx.mlx, cub->mlx.mlx_win);
 		render(cub);
+		mlx_clear_window(cub->mlx.mlx, cub->mlx.mlx_win);
+        mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.mlx_win, cub->view.img, 0, 0);
 		minimap_update(cub);
 	}
 	return (0);
@@ -75,8 +78,10 @@ int	main(int argc, char **argv)
 	initialize(&cub);
 	get_params(&cub, argv[1]);
 	minimap_initialize(&cub);
-	render(&cub);
+	create_image(&cub.mlx, &cub.view, WIN_X, WIN_Y);
 	minimap_update(&cub);
+	render(&cub);
+    mlx_put_image_to_window(cub.mlx.mlx, cub.mlx.mlx_win, cub.view.img, 0, 0);
 	mlx_hook(cub.mlx.mlx_win, 17, 0L, end, &cub);
 	mlx_hook(cub.mlx.mlx_win, 02, 1L << 0, key_press, &cub);
 	mlx_key_hook(cub.mlx.mlx_win, key_release, &cub);

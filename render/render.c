@@ -40,26 +40,26 @@
 
 void    set_texture(t_cub *cub)
 {
-        if (cub->wall_data.side_color == 1 && cub->ray.ray_dir_y < 0) //horizontal
-        {
-                cub->params.texture = &cub->params.texture_north;
-                cub->params.texture->wallx = (int)cub->ray.x % SIZE_OF_CASES;
-        }
-        else if (cub->wall_data.side_color == 1 && cub->ray.ray_dir_y > 0)
-        {
-                cub->params.texture = &cub->params.texture_south;
-                cub->params.texture->wallx = SIZE_OF_CASES - (int)cub->ray.x % SIZE_OF_CASES;
-        }
-        if (cub->wall_data.side_color == 0 && cub->ray.ray_dir_x < 0)//vertical
-        {
-                cub->params.texture = &cub->params.texture_east;
-                cub->params.texture->wallx = SIZE_OF_CASES - (int)cub->ray.y % SIZE_OF_CASES;
-        }
-        else if (cub->wall_data.side_color == 0 && cub->ray.ray_dir_x > 0)
-        {
-                cub->params.texture = &cub->params.texture_west;
-                cub->params.texture->wallx = (int)cub->ray.y % SIZE_OF_CASES;
-        }
+	if (cub->wall_data.side_color == 1 && cub->ray.ray_dir_y < 0) //horizontal
+	{
+		cub->params.texture = &cub->params.texture_north;
+		cub->params.texture->wallx = (int)cub->ray.x % SIZE_OF_CASES;
+	}
+	else if (cub->wall_data.side_color == 1 && cub->ray.ray_dir_y > 0)
+	{
+		cub->params.texture = &cub->params.texture_south;
+		cub->params.texture->wallx = SIZE_OF_CASES - (int)cub->ray.x % SIZE_OF_CASES;
+	}
+	if (cub->wall_data.side_color == 0 && cub->ray.ray_dir_x < 0)//vertical
+	{
+		cub->params.texture = &cub->params.texture_east;
+		cub->params.texture->wallx = SIZE_OF_CASES - (int)cub->ray.y % SIZE_OF_CASES;
+	}
+	else if (cub->wall_data.side_color == 0 && cub->ray.ray_dir_x > 0)
+	{
+		cub->params.texture = &cub->params.texture_west;
+		cub->params.texture->wallx = (int)cub->ray.y % SIZE_OF_CASES;
+	}
 }
 
 // void    init_wall(t_cub *cub, double ray_dist)
@@ -188,42 +188,36 @@ int cast_ray_vertical(t_cub *cub)
         return false;
 }
 
-void find_dist(t_cub *cub)
+void	find_dist(t_cub *cub)
 {
-        while (cub->ray.x >= 0 && cub->ray.y >= 0) 
-        {
-                cub->ray.x = cub->player.pos.x;
-                cub->ray.y = cub->player.pos.y;
-                cub->ray.wall_dist = 0;
-
-                if ((cub->ray.dist_x < cub->ray.dist_y) || fabs(cub->ray.ray_dir_y) == 0)
-                        if (cast_ray_horizontal(cub))
-                                break;      
-                cub->ray.x = cub->player.pos.x;
-                cub->ray.y = cub->player.pos.y;
-                cub->ray.wall_dist = 0;
-                if (cub->ray.dist_y < cub->ray.dist_x)
-                        if (cast_ray_vertical(cub))
-                                break;
-        }
+	while (cub->ray.x >= 0 && cub->ray.y >= 0) 
+	{
+		cub->ray.x = cub->player.pos.x;
+		cub->ray.y = cub->player.pos.y;
+		cub->ray.wall_dist = 0;
+		if ((cub->ray.dist_x < cub->ray.dist_y) || fabs(cub->ray.ray_dir_y) == 0)
+			if (cast_ray_horizontal(cub))
+				break ;
+		cub->ray.x = cub->player.pos.x;
+		cub->ray.y = cub->player.pos.y;
+		cub->ray.wall_dist = 0;
+		if (cub->ray.dist_y < cub->ray.dist_x)
+			if (cast_ray_vertical(cub))
+				break ;
+	}
 }
 
 void render(t_cub *cub) 
 {
-        cub->mlx.img = mlx_new_image(cub->mlx.mlx, WIN_X, WIN_Y);
-        cub->mlx.addr = mlx_get_data_addr(cub->mlx.img, &cub->mlx.bits_per_pixel, &cub->mlx.line_length,
-                                                                &cub->mlx.endian); 
-        cub->ray.print_x = 0; 
-        cub->player.rad_angle = cub->player.angle * DEGRE_TO_RAD;
-        cub->ray.angle_raycast_rad = cub->player.rad_angle + (FOV * DEGRE_TO_RAD/ 2);
-        while (cub->ray.print_x < WIN_X)
-        {
-                ray_var_init(cub);
-                find_dist(cub);
-                draw_wall(cub->ray.wall_dist, cub);
-                cub->ray.angle_raycast_rad -= DECREASE_ANGLE;
-                cub->ray.print_x++;
-        }
-        mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.mlx_win, cub->mlx.img, 0, 0);
-        mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);
+	cub->ray.print_x = 0; 
+	cub->player.rad_angle = cub->player.angle * DEGRE_TO_RAD;
+	cub->ray.angle_raycast_rad = cub->player.rad_angle + (FOV * DEGRE_TO_RAD/ 2);
+	while (cub->ray.print_x < WIN_X)
+	{
+		ray_var_init(cub);
+		find_dist(cub);
+		draw_wall(cub->ray.wall_dist, cub);
+		cub->ray.angle_raycast_rad -= DECREASE_ANGLE;
+		cub->ray.print_x++;
+	}
 }

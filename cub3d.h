@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 15:41:23 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:39:59 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
-	int	width;
-	int	height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_keys
@@ -96,7 +96,7 @@ typedef struct s_coordinates
 {
 	double	x;
 	double	y;
-	int	dist_to_wall_limit;
+	int		dist_to_wall_limit;
 	double	check_x;
 	double	check_y;
 }	t_coordinates;
@@ -112,11 +112,6 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 }	t_mlx;
 
 typedef struct s_minimap
@@ -202,6 +197,7 @@ typedef struct s_cub
 	char		**errors;
 	t_draw_wall	wall_data;
 	t_raycast_data	ray;
+	t_img		view;
 	int		i_error;
 
 }	t_cub;

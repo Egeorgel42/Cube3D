@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:43:51 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/25 16:09:58 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:40:41 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	key_release(int keycode, t_cub *cub)
 	return (0);
 }
 */
-
 int	key_release(int keycode, t_cub *cub)
 {
 	if (keycode == 13)

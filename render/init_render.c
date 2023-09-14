@@ -4,13 +4,13 @@ void    init_wall(t_cub *cub, double ray_dist)
 {
         ray_dist = ray_dist * cos(cub->ray.new_ray_angle_rad);
         cub->wall_data.wall_height = (double)SIZE_OF_CASES / ray_dist * (double)DIST_TO_PROJECTION_PLANE;
-        cub->wall_data.wall_top = ((double)WIN_Y - cub->wall_data.wall_height) / (double)2;
+        cub->wall_data.wall_top = ((double)cub->WIN_Y - cub->wall_data.wall_height) / (double)2;
         cub->wall_data.wall_bottom = cub->wall_data.wall_top + cub->wall_data.wall_height;
         cub->ray.draw_y = (int)cub->wall_data.wall_top;
-        if (cub->wall_data.wall_height >= WIN_Y)
+        if (cub->wall_data.wall_height >= cub->WIN_Y)
         {
                 cub->ray.draw_y = 0;
-                cub->wall_data.wall_bottom = WIN_Y;
+                cub->wall_data.wall_bottom = cub->WIN_Y;
         }
 }
 
