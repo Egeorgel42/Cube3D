@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 01:21:36 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/14 15:40:22 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	init_texture_addr(t_cub *cub)
 void	init_texture(t_cub *cub)
 {
 	if (!(cub->params.texture_east.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.e_text, &(cub->params.texture_east.img.width), &(cub->params.texture_east.img.height))))
-		error(cub, ERRFILE, " Error texture east");
+		error(cub, ERR_TEXT_FILE, " east");
 	if (!(cub->params.texture_north.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.n_text, &(cub->params.texture_north.img.width), &(cub->params.texture_north.img.height))))
-		error(cub, ERRFILE, "Error texture north");
+		error(cub, ERR_TEXT_FILE, " north");
 	if (!(cub->params.texture_south.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.s_text, &(cub->params.texture_south.img.width), &(cub->params.texture_south.img.height))))
-		error(cub, ERRFILE, "Error texture south");
+		error(cub, ERR_TEXT_FILE, " south");
 	if (!(cub->params.texture_west.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.w_text, &(cub->params.texture_west.img.width), &(cub->params.texture_west.img.height))))
-		error(cub, ERRFILE, "Error texture west");
+		error(cub, ERR_TEXT_FILE, " west");
 	init_texture_addr(cub);
 	check_texture_size(cub);
 }
