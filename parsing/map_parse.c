@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/11 23:11:15 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/12 11:31:10 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ static void	get_player(t_cub *cub, char **map, int i, int j)
 		cub->player.angle = 270;
 	else
 		cub->player.angle = 0;
+}
+
+static void	spaces_to_0(char **map)
+{
+	int	start;
+	int	end;
+	int	i;
+
+	i = -1;
+	while (map[++i])
+	{
+		start = 0;
+		end = ft_strlen(map[i]) - 1;
+		while (map[i][start] && map[i][start] != '1')
+			start++;
+		while (end >= 0 && map[i][end] != '1')
+			end--;
+		while (map[i][start] && start < end)
+		{
+			if (map[i][start] == ' ')
+				map[i][start] = '0';
+			start++;
+		}
+	}
 }
 
 static void	check_element(t_cub *cub, char **map, int i, int j)
@@ -86,5 +110,6 @@ void	map_parse(t_cub *cub)
 	char	**map;
 
 	map = cub->params.map;
+	spaces_to_0(map);
 	map_parcour(cub, map);
 }

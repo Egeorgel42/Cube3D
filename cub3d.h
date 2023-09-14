@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 12:33:01 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/14 13:14:01 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef enum e_err
 	NOPLAYER,
 	MULTIPLE_PLAYERS,
 	INVALID_MAP_CHARACTER,
-	MAPHOLE,
+	MAPSPACE,
 	ERRCOLOR,
 	NB_ARG,
 	ERR_TEXT_FILE,
