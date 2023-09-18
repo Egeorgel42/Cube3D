@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/18 16:37:47 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/18 22:27:49 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 //# include <mlx.h>
 # include "minilibx_opengl/mlx.h"
 # include <stdio.h>
@@ -140,12 +140,11 @@ typedef struct s_param
 
 typedef struct s_draw_wall
 {
-	int	side_color;
-	int	y;
-
+	int		side_color;
+	int		y;
 	double	wall_height;
-	double		wall_top;
-	double		wall_bottom;
+	double	wall_top;
+	double	wall_bottom;
 }	t_draw_wall;
 
 typedef struct s_raycast_data
@@ -158,18 +157,18 @@ typedef struct s_raycast_data
 	double	y;
 	double	angle_raycast_rad;
 	double	new_ray_angle_rad;
-	int	print_x;
-	int	draw_y;
+	int		print_x;
+	int		draw_y;
 	double	dist_x;
 	double	dist_y;
-	int	mapx;
-	int	mapy;
-	int	side;
+	int		mapx;
+	int		mapy;
+	int		side;
 	double	dist_to_vertical;
 	double	wall_dist;
 	double	dist_to_horizontal;
-	int	stepx;
-	int	stepy;
+	int		stepx;
+	int		stepy;
 }	t_raycast_data;
 
 typedef struct s_mv
@@ -182,21 +181,21 @@ typedef struct s_mv
 
 typedef struct s_cub
 {
-	t_mlx		mlx;
-	t_param		params;
-	t_player	player;
-	t_keys		keys;
-	t_minimap	minimap;
-	char		**errors;
-	t_draw_wall	wall_data;
+	t_mlx			mlx;
+	t_param			params;
+	t_player		player;
+	t_keys			keys;
+	t_minimap		minimap;
+	char			**errors;
+	t_draw_wall		wall_data;
 	t_raycast_data	ray;
-	t_img		view;
-	int			win_x;
-	int			win_y;
-	double		mv_scaling;
-	double		degre_to_rad;
-	double		decrease_angle;
-	double		dist_to_projection_plane;
+	t_img			view;
+	int				win_x;
+	int				win_y;
+	double			mv_scaling;
+	double			degre_to_rad;
+	double			decrease_angle;
+	double			dist_to_projection_plane;
 }	t_cub;
 
 /*PARSING*/

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ory <ory@student.42.fr>                    +#+  +:+       +#+         #
+#    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/09/18 14:56:14 by ory              ###   ########.fr        #
+#    Updated: 2023/09/18 22:22:34 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,9 @@ OBJ = ${SRC:.c=.o}
 
 OBJ_BONUS = ${SRC_BONUS:.c=.o}
 
-#LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
+LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
 #for linux
-LFLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -Llibft -lft
+#LFLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -Llibft -lft
 #for Macos
 #uncomment whichever flag is needed depending on your OS
 

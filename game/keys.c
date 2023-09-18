@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:43:51 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/18 15:04:11 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/18 22:23:25 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //On top are the fonctions for Linux and below for mac.
-//the fonctions for mac are missing the left and right arrow.
-/*
+
 int	key_press(int keycode, t_cub *cub)
 {
 	if (keycode == 65307)
@@ -50,7 +49,7 @@ int	key_release(int keycode, t_cub *cub)
 		cub->keys.r_right = false;
 	return (0);
 }
-*/
+/*
 int	key_release(int keycode, t_cub *cub)
 {
 	if (keycode == 13)
@@ -85,4 +84,4 @@ int	key_press(int keycode, t_cub *cub)
 	if (keycode == 124)
 		cub->keys.r_right = true;
 	return (0);
-}
+}*/
