@@ -3,54 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:41:08 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 15:40:22 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:50:09 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_texture_size(t_cub *cub)
-{
-	if (cub->params.texture_east.img.height != SIZE_OF_CASES || cub->params.texture_east.img.width != SIZE_OF_CASES)
-		error(cub, ERR_TEXT_SIZE, " on texture east, texture size must be SIZE_OF_CASES x SIZE_OF_CASES pixels");
-	if (cub->params.texture_north.img.height != SIZE_OF_CASES || cub->params.texture_north.img.width != SIZE_OF_CASES)
-		error(cub, ERR_TEXT_SIZE, " on texture north, texture size must be SIZE_OF_CASES x SIZE_OF_CASES pixels");
-	if (cub->params.texture_south.img.height != SIZE_OF_CASES || cub->params.texture_south.img.width != SIZE_OF_CASES)
-		error(cub, ERR_TEXT_SIZE, " on texture south, texture size must be SIZE_OF_CASES x SIZE_OF_CASES pixels");
-	if (cub->params.texture_west.img.height != SIZE_OF_CASES || cub->params.texture_west.img.width != SIZE_OF_CASES)
-		error(cub, ERR_TEXT_SIZE, " on texture west, texture size must be SIZE_OF_CASES x SIZE_OF_CASES pixels");
-}
-
 void	init_texture_addr(t_cub *cub)
 {
-	cub->params.texture_east.img.addr = mlx_get_data_addr(cub->params.texture_east.img.img, &cub->params.texture_east.img.bits_per_pixel, &cub->params.texture_east.img.line_length, &cub->params.texture_east.img.endian);
-	cub->params.texture_north.img.addr = mlx_get_data_addr(cub->params.texture_north.img.img, &cub->params.texture_north.img.bits_per_pixel, &cub->params.texture_north.img.line_length, &cub->params.texture_north.img.endian);
-	cub->params.texture_south.img.addr = mlx_get_data_addr(cub->params.texture_south.img.img, &cub->params.texture_south.img.bits_per_pixel, &cub->params.texture_south.img.line_length, &cub->params.texture_south.img.endian);
-	cub->params.texture_west.img.addr = mlx_get_data_addr(cub->params.texture_west.img.img, &cub->params.texture_west.img.bits_per_pixel, &cub->params.texture_west.img.line_length, &cub->params.texture_west.img.endian);
+	cub->params.texture_east.img.addr = mlx_get_data_addr
+		(cub->params.texture_east.img.img,
+			&cub->params.texture_east.img.bits_per_pixel,
+			&cub->params.texture_east.img.line_length,
+			&cub->params.texture_east.img.endian);
+	cub->params.texture_north.img.addr = mlx_get_data_addr
+		(cub->params.texture_north.img.img,
+			&cub->params.texture_north.img.bits_per_pixel,
+			&cub->params.texture_north.img.line_length,
+			&cub->params.texture_north.img.endian);
+	cub->params.texture_south.img.addr = mlx_get_data_addr
+		(cub->params.texture_south.img.img,
+			&cub->params.texture_south.img.bits_per_pixel,
+			&cub->params.texture_south.img.line_length,
+			&cub->params.texture_south.img.endian);
+	cub->params.texture_west.img.addr = mlx_get_data_addr
+		(cub->params.texture_west.img.img,
+			&cub->params.texture_west.img.bits_per_pixel,
+			&cub->params.texture_west.img.line_length,
+			&cub->params.texture_west.img.endian);
 }
 
 void	init_texture(t_cub *cub)
 {
-	if (!(cub->params.texture_east.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.e_text, &(cub->params.texture_east.img.width), &(cub->params.texture_east.img.height))))
-		error(cub, ERR_TEXT_FILE, " east");
-	if (!(cub->params.texture_north.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.n_text, &(cub->params.texture_north.img.width), &(cub->params.texture_north.img.height))))
-		error(cub, ERR_TEXT_FILE, " north");
-	if (!(cub->params.texture_south.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.s_text, &(cub->params.texture_south.img.width), &(cub->params.texture_south.img.height))))
-		error(cub, ERR_TEXT_FILE, " south");
-	if (!(cub->params.texture_west.img.img = mlx_xpm_file_to_image(cub->mlx.mlx, cub->params.w_text, &(cub->params.texture_west.img.width), &(cub->params.texture_west.img.height))))
-		error(cub, ERR_TEXT_FILE, " west");
+	load_texture(cub, &(cub->params.texture_east),
+		cub->params.e_text, " east");
+	load_texture(cub, &(cub->params.texture_north),
+		cub->params.n_text, " north");
+	load_texture(cub, &(cub->params.texture_south),
+		cub->params.s_text, " south");
+	load_texture(cub, &(cub->params.texture_west),
+		cub->params.w_text, " west");
 	init_texture_addr(cub);
 	check_texture_size(cub);
 }
 
 static int	count_lines(t_cub *cub, char *filename)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	int	i;
+	int		i;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

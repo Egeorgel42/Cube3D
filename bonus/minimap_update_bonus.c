@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_update.c                                   :+:      :+:    :+:   */
+/*   minimap_update_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 16:52:18 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 16:37:36 by egeorgel         ###   ########.fr       */
+/*   Created: 2023/09/18 14:32:06 by ory               #+#    #+#             */
+/*   Updated: 2023/09/18 14:34:29 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d_bonus.h"
 
 static void	player_to_minimap(t_cub *cub)
 {
@@ -55,23 +55,6 @@ static unsigned int	get_minimap_color(t_cub *cub, int y, int x)
 		return (MINIMAP_FLOOR_COLOR);
 	return (MINIMAP_EMPTY_COLOR);
 }
-
-// static void	print_angle(t_cub *cub)
-// {
-// 	int		i;
-// 	double	x;
-// 	double	y;
-
-// 	i = 0;
-// 	y = cub->minimap.size_y / 2;
-// 	x = cub->minimap.size_x / 2;
-// 	while (i++ < 20)
-// 	{
-// 		y -= cos(cub->player.angle / 180 * PI);
-// 		x -= sin(cub->player.angle / 180 * PI);
-// 		pixel_to_img(&cub->minimap.img, x, y, MINIMAP_PLAYER_COLOR);
-// 	}
-// }
 
 static void	print_angle(t_cub *cub)
 {

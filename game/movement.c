@@ -6,7 +6,7 @@
 /*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:47:12 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/14 12:34:36 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/18 15:29:20 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,43 @@
 
 void	angled_movement(t_cub *cub, double angle)
 {
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
+	t_mv	mouv;
 
-	dir_x = cos((cub->player.angle + angle) / 180 * PI);
-	dir_y = -sin((cub->player.angle + angle) / 180 * PI);
+	mouv.dir_x = cos((cub->player.angle + angle) / 180 * PI);
+	mouv.dir_y = -sin((cub->player.angle + angle) / 180 * PI);
 	cub->player.pos.dist_to_wall_limit = 10;
-	x = cub->player.pos.x + MV_SCALING * dir_x;
- 	y = cub->player.pos.y + MV_SCALING * dir_y;
-	cub->player.pos.check_x = x + dir_x * cub->player.pos.dist_to_wall_limit;
-	cub->player.pos.check_y = y + dir_y * cub->player.pos.dist_to_wall_limit;
-	if (cub->params.map[(int)(cub->player.pos.check_y/ SIZE_OF_CASES)][(int)(cub->player.pos.x / SIZE_OF_CASES)] != '1')
-		cub->player.pos.y = y;
-	if (cub->params.map[(int)(cub->player.pos.y/ SIZE_OF_CASES)][(int)(cub->player.pos.check_x / SIZE_OF_CASES)] != '1')
-		cub->player.pos.x = x;
+	mouv.x = cub->player.pos.x + cub->mv_scaling * mouv.dir_x;
+	mouv.y = cub->player.pos.y + cub->mv_scaling * mouv.dir_y;
+	cub->player.pos.check_x = mouv.x + mouv.dir_x
+		* cub->player.pos.dist_to_wall_limit;
+	cub->player.pos.check_y = mouv.y + mouv.dir_y
+		* cub->player.pos.dist_to_wall_limit;
+	if (cub->params.map[(int)(cub->player.pos.check_y / SIZE_OF_CASES)]
+		[(int)(cub->player.pos.x / SIZE_OF_CASES)] != '1')
+		cub->player.pos.y = mouv.y;
+	if (cub->params.map[(int)(cub->player.pos.y / SIZE_OF_CASES)]
+		[(int)(cub->player.pos.check_x / SIZE_OF_CASES)] != '1')
+		cub->player.pos.x = mouv.x;
+}
+
+static double	addup_mouv2(t_cub *cub)
+{
+	if (cub->keys.d && cub->keys.s)
+		return (225);
+	else if (cub->keys.a && cub->keys.s)
+		return (135);
+	else if (cub->keys.a && cub->keys.w)
+		return (45);
+	else if (cub->keys.w)
+		return (0);
+	else if (cub->keys.a)
+		return (90);
+	else if (cub->keys.s)
+		return (180);
+	else if (cub->keys.d)
+		return (-90);
+	else
+		return (-1);
 }
 
 static double	addup_movement(t_cub *cub)
@@ -48,22 +69,8 @@ static double	addup_movement(t_cub *cub)
 		return (-1);
 	else if (cub->keys.d && cub->keys.w)
 		return (315);
-	else if (cub->keys.d && cub->keys.s)
-		return (225);
-	else if (cub->keys.a && cub->keys.s)
-		return (135);
-	else if (cub->keys.a && cub->keys.w)
-		return (45);
-	else if (cub->keys.w)
-		return (0);
-	else if (cub->keys.a)
-		return (90);
-	else if (cub->keys.s)
-		return (180);
-	else if (cub->keys.d)
-		return (-90);
 	else
-		return (-1);
+		return (addup_mouv2(cub));
 }
 
 bool	movement(t_cub *cub)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 12:58:00 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/08/02 16:22:22 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:21:48 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ int	map_size(char **map)
 			k++;
 	}
 	return (k);
+}
+
+void	load_texture(t_cub *cub, t_texture *texture,
+	char *file_path, char *error_msg)
+{
+	texture->img.img = mlx_xpm_file_to_image(cub->mlx.mlx,
+			file_path, &(texture->img.width), &(texture->img.height));
+	if (!texture->img.img)
+		error(cub, ERR_TEXT_FILE, error_msg);
 }

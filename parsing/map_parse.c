@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:58:54 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/12 11:31:10 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:16:37 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// static void	get_player(t_cub *cub, char **map, int i, int j)
-// {
-// 	cub->player.pos.y = i * SIZE_OF_CASES + SIZE_OF_CASES / 2;
-// 	cub->player.pos.x = j * SIZE_OF_CASES + SIZE_OF_CASES / 2;
-// 	if (map[i][j] == 'N')
-// 		cub->player.angle = 0;
-// 	else if (map[i][j] == 'W')
-// 		cub->player.angle = 90;
-// 	else if (map[i][j] == 'S')
-// 		cub->player.angle = 180;
-// 	else
-// 		cub->player.angle = 270;
-// }
 
 static void	get_player(t_cub *cub, char **map, int i, int j)
 {
