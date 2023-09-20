@@ -6,7 +6,7 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:18:10 by ory               #+#    #+#             */
-/*   Updated: 2023/09/18 22:31:43 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:36:41 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	init_vertical_step_distance(t_cub *cub)
 	}
 	if (cub->ray.ray_dir_x > 0)
 	{
-			cub->ray.dist_to_vertical = ((int)(cub->player.pos.x
+		cub->ray.dist_to_vertical = ((int)(cub->player.pos.x
 					/ SIZE_OF_CASES)
 				* (SIZE_OF_CASES)
 				+ SIZE_OF_CASES) - cub->player.pos.x;
-			cub->ray.stepx = 1;
+		cub->ray.stepx = 1;
 	}
 }
 
@@ -77,8 +77,8 @@ void	ray_init_step_distance(t_cub *cub)
 			/ cub->ray.ray_dir_x);
 	if (fabs(cub->ray.ray_dir_y) == 0)
 	{
-			cub->ray.dist_y = 0.000;
-			cub->ray.ray_dir_y = 0;
+		cub->ray.dist_y = 0.000;
+		cub->ray.ray_dir_y = 0;
 	}
 	else
 		cub->ray.dist_y = fabs(cub->ray.dist_to_horizontal
