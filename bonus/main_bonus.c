@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:32:26 by ory               #+#    #+#             */
-/*   Updated: 2023/09/18 15:02:17 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/20 16:54:47 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,13 @@ static void	initialize(t_cub *cub)
 		/ (tan(FOV * cub->degre_to_rad / 2));
 }
 
-static void	free_cub(t_cub *cub)
-{
-	freetab((void **)cub->errors);
-	freetab((void **)cub->params.map);
-	free(cub->params.n_text);
-	free(cub->params.s_text);
-	free(cub->params.e_text);
-	free(cub->params.w_text);
-	free(cub->params.ceiling_color);
-	free(cub->params.floor_color);
-	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_east.img.img);
-	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_north.img.img);
-	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_south.img.img);
-	mlx_destroy_image(cub->mlx.mlx, cub->params.texture_west.img.img);
-	mlx_destroy_image(cub->mlx.mlx, cub->minimap.img.img);
-	mlx_destroy_window(cub->mlx.mlx, cub->mlx.mlx_win);
-}
-//for unkown reasons if cub is not freed, leaks are present.
-
 static int	run_game(t_cub *cub)
 {
-	if (movement(cub))
-	{
-		render(cub);
-		mlx_clear_window(cub->mlx.mlx, cub->mlx.mlx_win);
-		mlx_put_image_to_window(cub->mlx.mlx,
-			cub->mlx.mlx_win, cub->view.img, 0, 0);
-		minimap_update(cub);
-	}
+	movement(cub);
+	render(cub);
+	mlx_put_image_to_window(cub->mlx.mlx,
+		cub->mlx.mlx_win, cub->view.img, 0, 0);
+	minimap_update(cub);
 	return (0);
 }
 
@@ -94,5 +72,4 @@ int	main(int argc, char **argv)
 	mlx_key_hook(cub.mlx.mlx_win, key_release, &cub);
 	mlx_loop_hook(cub.mlx.mlx, run_game, &cub);
 	mlx_loop(cub.mlx.mlx);
-	free_cub(&cub);
 }
