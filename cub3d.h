@@ -6,14 +6,13 @@
 /*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/18 22:26:27 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:25:42 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include <mlx.h>
-//# include "minilibx_opengl/mlx.h"
+# include "minilibx/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>

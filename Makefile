@@ -6,7 +6,7 @@
 #    By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 11:16:23 by egeorgel          #+#    #+#              #
-#    Updated: 2023/09/18 23:27:09 by egeorgel         ###   ########.fr        #
+#    Updated: 2023/09/20 17:30:21 by egeorgel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,9 @@ OBJ = ${SRC:.c=.o}
 
 OBJ_BONUS = ${SRC_BONUS:.c=.o}
 
-LFLAGS = -Llibft -lft -lmlx_Linux -lXext -lX11 -lm -lz
+LFLAGS = -Llibft -lft -Lminilibx -lmlx_Linux -lXext -lX11 -lm -lz
 #for linux
-#LFLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -Llibft -lft
+#LFLAGS = -Lminilibx -lmlx -framework OpenGL -framework AppKit -Llibft -lft
 #for Macos
 #uncomment whichever flag is needed depending on your OS
 
