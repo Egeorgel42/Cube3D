@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 12:58:00 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/18 16:21:48 by ory              ###   ########.fr       */
+/*   Updated: 2023/09/23 18:36:18 by egeorgel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool	empty_line(char *line)
 	{
 		if (!ft_strchr(" \n", line[i]))
 			return (false);
+		i++;
 	}
 	return (true);
 }
