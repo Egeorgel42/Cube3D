@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeorgel <egeorgel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ory <ory@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:30 by egeorgel          #+#    #+#             */
-/*   Updated: 2023/09/20 17:25:49 by egeorgel         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:47:52 by ory              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define MINIMAP_PLAYER_COLOR 0xAAFF0000
 # define MINIMAP_EMPTY_COLOR 0xFF000000
 # define PI 3.14159265358979323846
-# define FOV 60
+# define FOV 40
 # define RAD_DEGRE 0.0174533
 
 typedef enum e_param_type
